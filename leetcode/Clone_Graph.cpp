@@ -33,11 +33,10 @@ public:
                 if(map.find(nb) == map.end()){
                     UndirectedGraphNode *x = new UndirectedGraphNode(nb->label);
                     map[nb] = x;
-                    map[t]->neighbors.push_back(x);
                     st.push(nb);
-                }else{
-                    map[t]->neighbors.push_back(map[nb]);
                 }
+                
+                map[t]->neighbors.push_back(map[nb]);
             }
         }
         
@@ -58,6 +57,9 @@ public:
  * BFS based solution.
  * It is almost identical to the DFS solution except the order of edge copying is different from DFS.
  * DFS will make go deeper and deeper, while BFS will copy edges layer by layer.
+ *
+ * Every time a node is pushed into queue, its clone is created. Also their mapping relationship is
+ * kept in map<UndirectedGraphNode *, UndirectedGraphNode *> to clone edge later.
  */
 class Solution {
 public:
@@ -65,26 +67,26 @@ public:
         if(node == nullptr) return nullptr;
         
         unordered_map<UndirectedGraphNode *, UndirectedGraphNode *> map;
-        queue<UndirectedGraphNode *> st;
+        queue<UndirectedGraphNode *> queue;
         UndirectedGraphNode *t = nullptr;
         UndirectedGraphNode *nGraph = new UndirectedGraphNode(node->label);
         map[node] = nGraph;
         
-        st.push(node);
-        while(!st.empty()){
-            t = st.front();
-            st.pop();
+        queue.push(node);
+        while(!queue.empty()){
+            t = queue.front();
+            queue.pop();
             
             for(int i = 0; i < t->neighbors.size(); i++){
                 UndirectedGraphNode *nb = t->neighbors[i];
                 if(map.find(nb) == map.end()){
                     UndirectedGraphNode *x = new UndirectedGraphNode(nb->label);
                     map[nb] = x;
-                    map[t]->neighbors.push_back(x);
-                    st.push(nb);
-                }else{
-                    map[t]->neighbors.push_back(map[nb]);
+                    queue.push(nb);
                 }
+               
+                // for each edge, clone a copy on the new graph 
+                map[t]->neighbors.push_back(map[nb]);
             }
         }
         

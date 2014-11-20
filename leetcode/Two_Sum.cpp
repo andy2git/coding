@@ -1,28 +1,29 @@
-// solution with hash table to check if the element exists
 class Solution {
 public:
     vector<int> twoSum(vector<int> &numbers, int target) {
         if(numbers.size() < 2) return {-1, -1};
-        unordered_map<int, int> map;
         
-        int t;
-        int x = -1;
-        int y = -1;;
+        unordered_map<int, int> map;
+        vector<int> result;
+        
         for(int i = 0; i < numbers.size(); i++){
-            t = target - numbers[i];
-            if(map.find(t) == map.end()){
-                map[numbers[i]] = i+1;
+            auto it = map.find(target-numbers[i]);
+            
+            if(it != map.end()){
+                result.push_back(it->second);
+                result.push_back(i+1);
+                return result;
             }else{
-                x = i+1;
-                y = map[t];
-                break;
+                map[numbers[i]] = i+1;
             }
         }
         
-        if(x < y) return {x, y};
-        else return {y, x};
+        return {-1, -1};
     }
 };
+
+
+
 
 
 class Solution {

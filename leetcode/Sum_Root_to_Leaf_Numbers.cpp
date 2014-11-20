@@ -6,6 +6,9 @@
  *     TreeNode *right;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
+ *
+ * Solution: leaf node returns the path sum to the parent node. 
+ *
  */
 class Solution {
 public:
@@ -17,7 +20,6 @@ public:
     
 private:
     int sum_helper(TreeNode *root, int p){
-        if(root == nullptr) return 0;
         if(root->left == nullptr && root->right == nullptr) return p*10+root->val;
         
         int t = p*10+root->val;
@@ -30,13 +32,7 @@ private:
 };
 
 /**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
+ * sum all the value at the leaf node
  */
 class Solution {
 public:
@@ -50,7 +46,7 @@ public:
     
 private:
     void sum_helper(TreeNode *root, int p, int &sum){
-        if(root == nullptr) return;
+        // leaf node
         if(root->left == nullptr && root->right == nullptr){
             sum += p*10+root->val;
             return;

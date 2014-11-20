@@ -10,34 +10,31 @@
 class Solution {
 public:
     vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
-        if(root == nullptr) return vector<vector<int>>();
+        //if(root == nullptr) return vector<vector<int>>();
+        if(root == nullptr) return {};
         
         vector<vector<int>> result;
         queue<TreeNode *> p, q;
         p.push(root);
         
         vector<int> layer;
-        bool flag = true;
-        TreeNode *t = nullptr;
+        bool flag = false;
+
         while(!p.empty()){
-            t = p.front();
+            TreeNode *t = p.front();
+            p.pop();
             
             layer.push_back(t->val);
             if(t->left) q.push(t->left);
             if(t->right) q.push(t->right);
             
-            p.pop();
             if(p.empty()){
                 swap(p, q);
-                if(flag){
-                    result.push_back(layer);
-                    flag = false;
-                }else{
-                    reverse(layer.begin(), layer.end());
-                    result.push_back(layer);
-                    flag = true;
-                }
+                if(flag) reverse(layer.begin(), layer.end());
+
+                result.push_back(layer);
                 layer.clear();
+                flag = !flag;
             }
         }
         

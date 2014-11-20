@@ -6,6 +6,9 @@
  *     TreeNode *right;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
+ *
+ * Time complexity: O(n)
+ * Each element in the array is used exactly once.
  */
 class Solution {
 public:

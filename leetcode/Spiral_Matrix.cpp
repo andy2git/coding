@@ -15,13 +15,12 @@ public:
                 print_spiral(result, matrix, x1, y1, x2, y2, flag);
                 x1++;
                 y2--;
-                flag = false;
             }else{
                 print_spiral(result, matrix, x1, y1, x2, y2, flag);
                 y1++;
                 x2--;
-                flag = true;
             }
+            flag = !flag;
         }
         return result;
     }

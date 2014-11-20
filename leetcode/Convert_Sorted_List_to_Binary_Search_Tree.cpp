@@ -15,6 +15,11 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+/**
+ * Time complexity: O(nlgn)
+ * Each layer O(n) operation is needed to break the linked list into half
+ */
 class Solution {
 public:
     TreeNode *sortedListToBST(ListNode *head) {
