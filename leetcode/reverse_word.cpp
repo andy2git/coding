@@ -1,39 +1,35 @@
 class Solution {
 public:
     void reverseWords(string &s) {
-        if(s == "") return;
+        if(s.length() < 1) return;
+        size_t n = s.length();
         
-        reverse_str(s, 0, s.size()-1);
-        
+        //reverse the whole string
+        reverse_str(s, 0, n-1);
         int i = 0;
-        int j = 0;
-        int n = s.size();
         int k = 0;
+        int m = 0;
         
-        while(j < n){
-            while(j < n && s[j] == ' ') j++;
-            
-            k = i;
-            while(j < n && s[j] != ' '){
-                s[i++] = s[j++];
+        while(i < n){
+            //reverse word by word
+            while(i < n && s[i] == ' ') i++;
+            while(i < n && s[i] != ' ') s[k++] = s[i++];
+        
+            if(k > m) {
+                reverse_str(s, m, k-1);
+                s[k++] = ' ';
+                m = k;
             }
-            if(i > k) s[i++] = ' ';
-            
-            reverse_str(s, k, i-2);
         }
         
-        if(i > 0) s.resize(i-1);
+        if(k > 0) s.resize(k-1);
         else s.resize(0);
     }
 private:
-    // index [s, e]
-    void reverse_str(string &st, int s, int e){
-        if(s > e) return;
-        
-        while(s < e){
-            swap(st[s], st[e]);
-            s++;
-            e--;
+    void reverse_str(string &s, int b, int e){
+        while(b < e){
+            swap(s[b++], s[e--]);
         }
     }
+
 };
