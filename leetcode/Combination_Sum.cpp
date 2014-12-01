@@ -1,38 +1,35 @@
-/* Time Limit Exceeded */
 class Solution {
 public:
     vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
-        vector<vector<int>> result;
+        if(candidates.empty()) return {};
         sort(candidates.begin(), candidates.end());
         
-        vector<int> factor(candidates.size());
-        for(int i = 0; i < candidates.size(); i++){
-            factor[i] = target/candidates[i];
-        }
+        vector<vector<int>> result;
+        vector<int> sofar;
+        comb_sum_helper(result, sofar, 0, target, candidates);
         
-        combine_helper(result, factor, candidates, 0, target, vector<int>());
-
         return result;
     }
 private:
-    void combine_helper(vector<vector<int>> &result, vector<int> &factor, vector<int> &candidates, int s, int target, vector<int> sofar){
-        if(target == 0){
+    void comb_sum_helper(vector<vector<int>> &result, vector<int> sofar, int sum, int target, vector<int> remain){
+        if(sum == target){
             result.push_back(sofar);
             return;
         }
         
-        if(s >= factor.size()){
-            return;
+        if(remain.empty()) return;
+        
+        int t = remain[0];
+        remain.erase(remain.begin());
+        
+        comb_sum_helper(result, sofar, sum, target, remain);
+        
+        int i = 1;
+        while(sum + i*t <= target){
+            sofar.push_back(t);
+            comb_sum_helper(result, sofar, sum + i*t, target, remain);    
+            i++;
         }
         
-        for(int i = 0; i <= factor[s]; i++){
-            if(i > 0) {
-                sofar.push_back(candidates[s]);
-                target -= candidates[s];
-                if(target < 0) break;
-            }
-            combine_helper(result, factor, candidates, s+1, target, sofar);
-        }
     }
-
 };

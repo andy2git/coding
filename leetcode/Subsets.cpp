@@ -1,30 +1,32 @@
 class Solution {
 public:
-    vector<vector<int> > subsets(vector<int> &S) {
-        if(S.empty()) return vector<vector<int>>();
-        
+    vector<vector<int> > subsets(vector<int> &s) {
+        if(s.empty()) return {};
+       
         vector<vector<int>> result;
-        vector<int> t;
-        
-        sort(S.begin(), S.end());
-        subset_helper(result, t, S);
-        
+        vector<int> vec;
+       
+        sort(s.begin(), s.end());
+        subsets_helper(result, vec, s);
         return result;
     }
-    
-    void subset_helper(vector<vector<int>> &result, vector<int> &sofar, vector<int> &rest){
-        if(rest.empty()){
+   
+private:
+    void subsets_helper(vector<vector<int>> &result, vector<int> &sofar, vector<int> &remain){
+        if(remain.empty()){
             result.push_back(sofar);
             return;
         }
-        
-        int x = rest[0];
-        auto it = rest.erase(rest.begin());
-        subset_helper(result, sofar, rest);
-        
-        sofar.push_back(x);
-        subset_helper(result, sofar, rest);
-        //recover the rest back 
-        rest.insert(it, x);
+       
+        int t = remain[0];
+        remain.erase(remain.begin());
+        subsets_helper(result, sofar, remain);
+       
+        sofar.push_back(t);
+        subsets_helper(result, sofar, remain);
+       
+        //recover as sofar and remain are global variables now
+        remain.insert(remain.begin(),t);
+        sofar.pop_back();
     }
 };

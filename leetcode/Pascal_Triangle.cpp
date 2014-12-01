@@ -1,26 +1,27 @@
+/* lower half of a 2-d matrix 
+ * 
+ * 1
+ * 1 1
+ * 1 2 1
+ * 1 3 3 1
+ */
 class Solution {
 public:
     vector<vector<int> > generate(int numRows) {
-        if(numRows <= 0) return vector<vector<int>>();
+        if(numRows <= 0) return {};
 
-        vector<vector<int>> result = {{1}};
-        vector<int> layer;
-        int k = 2;
-        int t;
+        vector<vector<int>> result;
+        result.push_back({1});
         
-        while(k <= numRows){
-            layer.clear();
-            for(int i = 0; i < k; i++){
-                
-                if(i > 0) t = result[k-2][i-1];
-                else t = 0;
-                
-                if(i < k-1) t += result[k-2][i];
-                else t += 0;
-                layer.push_back(t);
+        vector<int> row;
+        for(int i = 1; i < numRows; i++){
+            row.clear();
+            for(int j = 0; j <= i; j++){
+                if(j == 0) row.push_back(1);
+                else if(j == i) row.push_back(1);
+                else row.push_back(result[i-1][j-1] + result[i-1][j]);
             }
-            result.push_back(layer);
-            k++;
+            result.push_back(row);
         }
         
         return result;

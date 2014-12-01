@@ -10,19 +10,16 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode *root) {
-        if(root == nullptr) return true;
-        
+        if(!root) return true;
         return is_symmetric_helper(root->left, root->right);
     }
     
-    bool is_symmetric_helper(TreeNode *left, TreeNode *right){
-        if(left == nullptr && right == nullptr) return true;
-        else if(left == nullptr && right) return false;
-        else if(left && right == nullptr) return false;
+    bool is_symmetric_helper(TreeNode *p, TreeNode *q){
+        if(!p && !q) return true;
+        if(!p && q) return false;
+        if(p && !q) return false;
         
-        
-        if(left->val != right->val) return false;
-        return is_symmetric_helper(left->right, right->left) && is_symmetric_helper(left->left, right->right);
-        
+        return (p->val == q->val) && is_symmetric_helper(p->right, q->left)
+            && is_symmetric_helper(p->left, q->right);
     }
 };

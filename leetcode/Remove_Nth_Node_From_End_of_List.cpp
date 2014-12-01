@@ -20,6 +20,7 @@ public:
         }
         if(q == nullptr){return p->next;}
         
+        // if we need to find the pointer one ahead of target elem
         while(q->next){
             q = q->next;
             p = p->next;

@@ -6,22 +6,29 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+/* Solution:
+ * ---------
+ * check if the next element is a duplicate of the current one
+ * 1. if yes, remove the next element
+ * 2. if no, the next element becomes the current elem 
+ *  
+ */
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
-        if(head == nullptr) return nullptr;
-        if(head->next == nullptr) return head;
+        if(!head) return nullptr;
+        if(!head->next) return head;
         
-        ListNode *pre = head;
-        ListNode *cur = head->next;
-        
-        while(cur){
-            if(cur->val == pre->val){
-                pre->next = cur->next;
-                cur = cur->next;
+        ListNode *p = head;
+        ListNode *q = nullptr;
+        while(p->next){
+            q = p->next;
+            
+            if(p->val == q->val){
+                p->next = q->next;
             }else{
-                pre = cur;
-                cur = cur->next;
+                p = p->next;
             }
         }
         

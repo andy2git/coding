@@ -1,17 +1,19 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        if(n <= 2) return n;
+        if(n <= 1) return 1;
         
         int first = 1;
-        int second = 2;
+        int second = 1;
         int third;
-        while(n > 2){
-            third = first+second;
+        
+        while(n > 1){
+            third = first + second;
             first = second;
             second = third;
             n--;
         }
+        
         return second;
     }
 };

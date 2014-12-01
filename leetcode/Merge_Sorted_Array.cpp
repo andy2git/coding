@@ -13,6 +13,7 @@ public:
             }
         }
         
+        // append the remaining into A[]
         while(j >= 0){
             A[k--] = B[j--];
         }

@@ -9,31 +9,31 @@
  */
 class Solution {
 public:
-    vector<vector<int>> levelOrderBottom(TreeNode *root) {
-        if(root == nullptr) return vector<vector<int>>();
-        
+    vector<vector<int> > levelOrderBottom(TreeNode *root) {
+        if(root == nullptr) return {}; 
+        if(!root->left && !root->right) return {{root->val}};
+     
+        vector<vector<int>> result;
         queue<TreeNode *> p, q;
         p.push(root);
-        
-        vector<vector<int>> result;
+     
         vector<int> layer;
-        TreeNode *t = nullptr;
-        
         while(!p.empty()){
-            t = p.front();
+            TreeNode *t = p.front();
             p.pop();
+     
             layer.push_back(t->val);
-            
             if(t->left) q.push(t->left);
             if(t->right) q.push(t->right);
-            
+     
             if(p.empty()){
-                swap(p, q);
-                result.insert(result.begin(), layer);
+                swap(p, q); 
+                result.push_back(layer);
                 layer.clear();
-            }
-        }
-        
+            }   
+        }   
+     
+        reverse(result.begin(), result.end());
         return result;
     }
 };

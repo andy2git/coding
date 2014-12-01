@@ -10,26 +10,21 @@
 class Solution {
 public:
     bool isBalanced(TreeNode *root) {
-        if(root == nullptr) return true;
         
-        int h = is_balanced(root);
-        
-        if(h < 0) return false;
-        return true;
+        return is_balanced_helper(root) >= 0;
     }
 private:
-    int is_balanced(TreeNode *root){
-        if(root == nullptr) return 0;
-        if(root->left == nullptr && root->right == nullptr) return 1;
+    int is_balanced_helper(TreeNode *root){
+        if(!root) return 0;
+        if(!root->left && !root->right) return 1;
         
-        int left = is_balanced(root->left);
-        if(left < 0) return -1;
+        int l = is_balanced_helper(root->left);
+        if(l == -1) return -1;
         
-        int right = is_balanced(root->right);
-        if(right < 0) return -1;
+        int r = is_balanced_helper(root->right);
+        if(r == -1) return -1;
         
-        if(abs(left-right) > 1) return -1;
-        else return max(left, right)+1;
+        if(abs(l-r) <= 1) return max(l, r)+1;
+        else return -1;
     }
-    
 };
