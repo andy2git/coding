@@ -11,7 +11,7 @@ public:
         return result;
     }
 private:
-    void comb_sum_helper(vector<vector<int>> &result, vector<int> sofar, int sum, int target, vector<int> remain){
+    void comb_sum_helper(vector<vector<int>> &result, vector<int> &sofar, int sum, int target, vector<int> &remain){
         if(sum == target){
             result.push_back(sofar);
             return;
@@ -31,5 +31,11 @@ private:
             i++;
         }
         
+        //recover from options
+        while(i > 1) {
+            sofar.pop_back();
+            i--;
+        }
+        remain.insert(remain.begin(), t);
     }
 };
