@@ -1,27 +1,36 @@
+/**
+ * Solution: look at the structure of the solution.
+ * If the loop starts somewhere. Its prefix cannot be < 0.
+ * So if the prefix is < 0. The start index has to be the next.
+ *       |------------| == 0 | > 0 |
+ *
+ * Also we have to check if there exists such a solution.
+ */
+
 class Solution {
 public:
     int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
-        vector<int> left(gas.size());
+        if(gas.empty() || cost.empty()) return -1;
         
+        vector<int> diff(gas.size());
         for(int i = 0; i < gas.size(); i++){
-            left[i] = gas[i] - cost[i];
+            diff[i] = gas[i] - cost[i];
         }
         
-        int s = 0;
         int sum = 0;
-        int t_sum = 0;
-        
-        for(int i = 0; i < left.size(); i++){
-            sum += left[i];
-            t_sum += left[i];
-            
+        int remain = 0;
+        int ind = 0;
+
+        for(int i = 0; i < diff.size(); i++){
+            sum += diff[i];
+            remain += diff[i];
             if(sum < 0){
                 sum = 0;
-                s = i+1;
+                ind = i+1;
             }
         }
-        if(s >= left.size() || t_sum < 0) return -1;
-        else return s;
         
+        if(ind < diff.size() && remain >= 0) return ind;
+        else return -1;
     }
 };

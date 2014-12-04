@@ -9,24 +9,22 @@
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        if(root == nullptr) return;
-        if(root->left == nullptr && root->right == nullptr) return;
+        if(!root) return;
+        if(!root->left && !root->right) return;
         
-        queue<TreeLinkNode *> cq, nq;
-        cq.push(root);
+        queue<TreeLinkNode *> p, q;
+        p.push(root);
         
-        TreeLinkNode *t = nullptr;
-        while(!cq.empty()){
-            t = cq.front();
-            cq.pop();
+        while(!p.empty()){
+            TreeLinkNode *t = p.front();
+            p.pop();
             
-            if(t->left) nq.push(t->left);
-            if(t->right) nq.push(t->right);
+            if(t->left) q.push(t->left);
+            if(t->right) q.push(t->right);
             
-            if(!cq.empty()) t->next = cq.front();
-            else{
-                swap(cq, nq);
-            }
+            if(!p.empty()) t->next = p.front();
+            else swap(p, q);
         }
+        
     }
 };

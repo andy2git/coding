@@ -9,13 +9,12 @@
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        if(root == nullptr) return;
-        if(root->left == nullptr && root->right == nullptr) return;
+        if(!root) return;
+        if(!root->left && !root->right) return;
         
         root->left->next = root->right;
-        if(root->next){
-            root->right->next = root->next->left;
-        }
+        if(root->next) root->right->next = root->next->left;
+        
         connect(root->left);
         connect(root->right);
     }
