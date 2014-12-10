@@ -16,19 +16,17 @@ public:
                 t = num[i]+num[j]+num[k];
                 
                 if(t == target) return t;
-                else if(t < target){
-                    int dis = abs(t-target);
-                    if(dis < min){
-                        min = dis;
-                        solution = t;
-                    }
+                
+                // abstract this code out
+                int dis = abs(t-target);
+                if(dis < min){
+                    min = dis;
+                    solution = t;
+                }
+                
+                if(t < target){
                     j++;    
                 }else{
-                    int dis = abs(t-target);
-                    if(dis < min){
-                        min = dis;
-                        solution = t;
-                    }
                     k--;
                 }
             }
