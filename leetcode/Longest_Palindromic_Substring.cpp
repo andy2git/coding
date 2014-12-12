@@ -1,46 +1,41 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        if(s == "") return "";
+        if(s.length() <= 1) return s;
         
-        int n = s.size();
-        vector<vector<bool>> tbl(n, vector<bool>(n, false));
+        int maxLen = 1;
+        int sInd = 0;
+        int n = s.length();
         
         for(int i = 0; i < n; i++){
-            tbl[i][i] = true;
-        }
-        
-        int max_len = 1;
-        int s_ind = 0;
-        
-        for(int i = 0; i < n-1; i++){
-            if(s[i] == s[i+1]) {
-                tbl[i][i+1] = true;
-                max_len = 2;
-                s_ind = i;
-            }else{
-                tbl[i][i+1] = false;
+            if(i > 0){
+                find_max_palin(s, i-1, i+1, 1, maxLen, sInd);
             }
+            
+            find_max_palin(s, i, i+1, 0, maxLen, sInd);
         }
         
-        int j;
-        for(int len = 3; len <= n; len++){
-            for(int i = 0; i <= n-len; i++){
-                j = i + len -1;
-                
-                if(s[i] == s[j] && tbl[i+1][j-1]){
-                    tbl[i][j] = true;
-                    if(len > max_len){
-                        max_len = len;
-                        s_ind = i;
-                    }
-                }else{
-                    tbl[i][j] = false;
+        return s.substr(sInd, maxLen);
+    }
+private:
+    void find_max_palin(string &s, int j, int k, int len, int &maxLen, int &sInd){
+        int n = s.length();
+        while(j >= 0 && k < n){
+            if(s[j] == s[k]){
+                len += 2;
+                j--; k++;
+            }else {
+                if(len > maxLen){
+                    maxLen = len;
+                    sInd = j+1;
                 }
+                break;
             }
         }
         
-        return s.substr(s_ind, max_len);
+        if(len > maxLen){
+            maxLen = len;
+            sInd = j+1;
+        }
     }
 };
-

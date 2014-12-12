@@ -1,3 +1,6 @@
+/**
+ * Tips: How to narrow to the half range?
+ */
 class Solution {
 public:
     int search(int A[], int n, int target) {
