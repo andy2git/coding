@@ -32,15 +32,14 @@ public:
         }
         
         while(p && q){
-            if(p == q) break;
+            if(p == q) return p;
             else{
                 p = p->next;
                 q = q->next;
             }
         }
         
-        if(p) return p;
-        else return nullptr;
+        return nullptr;
     }
     
 private:
@@ -65,5 +64,40 @@ private:
             p = p->next;
         }
         return len;
+    }
+};
+
+
+/* Second solution */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(!headA || !headB) return nullptr;
+        ListNode *p = headA;
+        ListNode *q = headB;
+        
+        advance_ptrs(p, q);
+        if(q) p = headB;
+        else q = headA;
+        
+        advance_ptrs(p, q);
+        if(!q) q = headA;
+        else p = headB;
+        
+        while(p && q){
+            if(p == q) return p;
+            p = p->next;
+            q = q->next;
+        }
+        
+        return nullptr;
+    }
+    
+private:
+    void advance_ptrs(ListNode *&p, ListNode *&q){
+        while(p && q){
+            p = p->next;
+            q = q->next;
+        }
     }
 };
