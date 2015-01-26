@@ -3,35 +3,32 @@ public:
     string simplifyPath(string path) {
         if(path == "") return path;
         
-        stack<string> st;
-        int n = path.size()-1;
+        vector<string> dirs;
         int i = 0;
         int j;
+        int n = path.size();
         string t;
         
-        while(i <= n){
+        while(i < n){
             j = i+1;
-            
-            while(j <= n && path[j] != '/') j++;
-            
+            while(j < n && path[j] != '/') j++;
             t = path.substr(i, j-i);
+            
             if(t == "/" || t == "/."){
             }else if(t == "/.."){
-                if(!st.empty()) st.pop();
+                if(!dirs.empty()) dirs.pop_back();
             }else{
-                st.push(t);
+                dirs.push_back(t);
             }
             i = j;
         }
         
-        if(st.empty()) return string("/");
+        if(dirs.empty()) return string("/");
         
-        string result;
-        while(!st.empty()){
-            result = st.top() + result;
-            st.pop();
+        stringstream result;
+        for(auto dir : dirs){
+            result << dir;
         }
-        
-        return result;
+        return result.str();
     }
 };

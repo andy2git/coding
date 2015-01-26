@@ -10,6 +10,8 @@ public:
             
             int m = l + (h-l)/2;
             if(num[m] < num[h]) h = m;
+            // not sure which subarray to discard
+            // can only remove one elem for next iteration
             else if (num[m] == num[h]) h--;
             else l = m;
         }

@@ -24,7 +24,7 @@ private:
         int r = is_balanced_helper(root->right);
         if(r == -1) return -1;
         
-        if(abs(l-r) <= 1) return max(l, r)+1;
-        else return -1;
+        if(abs(l-r) > 1) return -1;
+        else return max(l,r) + 1;
     }
 };
