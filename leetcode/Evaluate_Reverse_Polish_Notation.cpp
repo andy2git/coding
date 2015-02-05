@@ -1,33 +1,34 @@
 class Solution {
 public:
     int evalRPN(vector<string> &tokens) {
-        if(tokens.empty()) throw runtime_error("empty input");
+        if(tokens.size() == 0) throw runtime_error("empty input!");
         
         stack<int> st;
-        string s;
-        int x, y;
-        
         for(int i = 0; i < tokens.size(); i++){
-            s = tokens[i];
-            if(s == "+" || s == "-" || s == "*" || s == "/"){
-                // expect two operands
-                if(st.empty()) throw runtime_error("wrong input!");
-                x = st.top();
-                st.pop();
-                
-                // expect two operands
-                if(st.empty()) throw runtime_error("wrong input!");
-                y = st.top();
-                st.pop();
-                
-                if(s == "+") st.push(y+x);
-                if(s == "-") st.push(y-x);
-                if(s == "*") st.push(y*x);
-                if(s == "/") st.push(y/x);
+            if(tokens[i] == "+" || tokens[i] == "-" || tokens[i] == "/" || tokens[i] == "*"){
+                opExec(st, tokens[i]);        
             }else{
-                st.push(stoi(s));
+                st.push(stoi(tokens[i]));
             }
         }
-        return st.top();
+
+        if(st.empty()) throw runtime_error("wrong expr!");
+        else return st.top();
+    }
+private:
+    void opExec(stack<int> &st, string &op){
+        int a, b;
+        if(st.empty()) throw runtime_error("wrong expr");
+        a = st.top();
+        st.pop();
+                
+        if(st.empty()) throw runtime_error("wrong expr");
+        b = st.top();
+        st.pop();
+    
+        if(op == "+") st.push(b+a);
+        if(op == "-") st.push(b-a);
+        if(op == "/") st.push(b/a);
+        if(op == "*") st.push(b*a);
     }
 };

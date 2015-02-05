@@ -28,6 +28,8 @@ public:
         // copy random ptrs by following next
         p = head;
         while(p){
+            // this line can be removed without affecting correctness
+            // map[nullptr] will give you nullptr
             if(!p->random) map[p]->random = nullptr;
             else map[p]->random = map[p->random];
             p = p->next;

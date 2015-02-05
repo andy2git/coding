@@ -1,7 +1,27 @@
 /**
  * S[k] max subarray sum ending at k
- * S[k] = max(S[k-1] + A[k], 0)
- * Optimal substructure: optimal max subsum ending at k. S[k-1] must be optimal max sun ending at k-1
+ * S[k] = max(S[k-1] + A[k], A[k]) - the prefix of max subarray can not be < 0
+ * 
+ */
+class Solution {
+public:
+    int maxSubArray(int A[], int n) {
+        if(n <= 0) throw runtime_error("empty input!");
+        
+        int maxSum;
+        vector<int> s(n, 0);
+        maxSum = s[0] = A[0];
+        
+        for(int i = 1; i < n; i++){
+            s[i] = max(A[i], s[i-1]+A[i]);
+            if(s[i] > maxSum) maxSum = s[i];
+        }
+        
+        return maxSum;
+    }
+};
+
+/** Optimal substructure: optimal max subsum ending at k. S[k-1] must be optimal max sun ending at k-1
  *    - if S[k] < 0, drop it. 
  *    - We also need to keep track of max subarray
  */
@@ -15,13 +35,9 @@ public:
             sum += A[i];
 
             // max subarray will have at least one elem
-            if(sum > max_sum){
-                max_sum = sum;
-            }
+            if(sum > max_sum) max_sum = sum;
             
-            if(sum < 0){
-                sum = 0;
-            }
+            if(sum < 0) sum = 0;
         }
         return max_sum;
     }

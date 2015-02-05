@@ -2,6 +2,27 @@
 #include <vector>
 using namespace std;
 
+/* DP solution */
+class Solution {
+public:
+    int numTrees(int n) {
+        if(n <= 0) return 0;
+        
+        vector<int> T(n+1, 0);
+        T[0] = 1;
+        
+        for(int i = 1; i <= n; i++){
+            T[i] = 0;
+            for(int j = 0; j < i; j++){
+                T[i] += T[j]*T[i-j-1];
+            }
+        }
+        
+        return T[n];
+    }
+};
+
+/* brute force recursive solution */
 class Solution {
 public:
     int numTrees(int n) {
@@ -70,25 +91,6 @@ public:
         }
         
         T[n] = sum;
-        return T[n];
-    }
-};
-
-// best solution with memoization
-class Solution_4 {
-public:
-    int numTrees(int n) {
-        if(n <= 1) return 1;
-        vector<int> T(n+1, 1);
-        
-        for(int i = 2; i < T.size(); i++){
-            int sum = 0;
-            for(int j = 0; j < i; j++){
-                sum += T[j]*T[i-j-1];
-            }
-            T[i] = sum;
-        }        
-        
         return T[n];
     }
 };

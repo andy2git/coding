@@ -9,23 +9,32 @@
 class Solution {
 public:
     ListNode *removeNthFromEnd(ListNode *head, int n) {
-        if(head == nullptr) return nullptr;
+        if(!head || n <= 0) return head;
         
-        ListNode *p = head;
-        ListNode *q = head;
+        ListNode dummy(0);
+        ListNode *d = &dummy;
+        d->next = head;
         
-        while(q && n > 0){
+        // advance q n steps ahead
+        ListNode *p = d;
+        ListNode *q = d;
+        int k = n;
+        while(k > 0){
             q = q->next;
-            n--;
+            k--;
         }
-        if(q == nullptr){return p->next;}
         
-        // if we need to find the pointer one ahead of target elem
+        // need a ptr one element ahead, so check q->next
         while(q->next){
-            q = q->next;
             p = p->next;
+            q = q->next;
         }
-        p->next = p->next->next;
-        return head;
+        
+        ListNode *t = p->next->next;
+        // do not forget to delete
+        delete p->next;
+        p->next = t;
+        
+        return dummy.next;
     }
 };
