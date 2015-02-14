@@ -9,44 +9,47 @@
 class Solution {
 public:
     ListNode *sortList(ListNode *head) {
-        if(head == nullptr) return nullptr;
-        if(head->next == nullptr) return head;
-        
-        ListNode *p = head;
-        ListNode *q = head->next->next;
-        
-        while(q){
-            if(q->next) q = q->next->next;
-            else break;
-            p = p->next;
-        }
-        q = p->next;
-        p->next = nullptr;
-        
-        ListNode *left = sortList(head);
-        ListNode *right = sortList(q);
-        return merge_list(left, right);
+       if(!head) return nullptr;
+       if(!head->next) return head;
+       
+       ListNode *p = head;
+       ListNode *q = head->next->next;
+       
+       while(q){
+           if(q->next) q = q->next->next;
+           else break;
+           p = p->next;
+       }
+       q = p->next;
+       p->next = nullptr;
+       p = head;
+       
+       p = sortList(p);
+       q = sortList(q);
+       
+       return mergeList(p, q);
+       
     }
-
 private:
-    ListNode *merge_list(ListNode *left, ListNode *right){
+    ListNode *mergeList(ListNode *p, ListNode *q){
+        if(!p) return q;
+        if(!q) return p;
+        
         ListNode dummy(0);
         ListNode *d = &dummy;
-        
-        while(left && right){
-            if(left->val < right->val){
-                d->next = left;
-                left = left->next;
-                d = d->next;
+        while(p && q){
+            if(p->val < q->val){
+                d->next = p;
+                p = p->next;
             }else{
-                d->next = right;
-                right = right->next;
-                d = d->next;
+                d->next = q;
+                q = q->next;
             }
+            d = d->next;
         }
         
-        if(left) d->next = left;
-        if(right) d->next = right;
+        if(p) d->next = p;
+        if(q) d->next = q;
         
         return dummy.next;
     }

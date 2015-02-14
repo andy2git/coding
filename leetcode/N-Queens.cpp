@@ -35,22 +35,16 @@ private:
     }
     
     bool is_safe(vector<vector<bool>> &board, int row, int col){
+        // row and column check for
         for(int j = 0; j < board.size(); j++){
             if(board[row][j]) return false;
             if(board[j][col]) return false;
         }
         
-        int ind = 1;
-        while(row-ind>=0 && col-ind>=0){
-            if(board[row-ind][col-ind]) return false;
-            ind++;
-        }
-        
-        ind = 1;
-        while(row+ind < board.size() && col-ind>=0){
-            if(board[row+ind][col-ind]) return false;
-            ind++;
-        }
+        // check diag
+        if(row>=1 && col>=1 && board[row-1][col-1]) return false;
+        if(row+1<board.size() && col>1 && board[row+ind][col-ind]) return false;
+
         return true;
     }
     
