@@ -26,8 +26,8 @@ public:
        for(int i = 0; i <= m; i++){
            for(int j = 0; j <= n; j++){
                if(i == 0 && j == 0) tbl[i][j] = true;
-               else if(i == 0 && j > 0) tbl[i][j] = (s3[j-1] == s2[j-1]);
-               else if(j == 0 && i > 0) tbl[i][j] = (s3[i-1] == s1[i-1]);
+               else if(i == 0 && j > 0) tbl[i][j] = t[i][j-1] && (s3[j-1] == s2[j-1]);
+               else if(j == 0 && i > 0) tbl[i][j] = t[i-1][j] && (s3[i-1] == s1[i-1]);
                else{
                    char t = s3[i+j-1];
                    if(t == s1[i-1]) tbl[i][j] = tbl[i-1][j] || tbl[i][j];
