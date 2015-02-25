@@ -12,6 +12,7 @@ public:
         }
     }
 
+
     int pop() {
         int x = dataStack.top();
         dataStack.pop();
@@ -19,9 +20,9 @@ public:
         if(x == minStack.top()){
             minStack.pop();
         }
-        
         return x;
     }
+
 
     int min() {
         return minStack.top();
