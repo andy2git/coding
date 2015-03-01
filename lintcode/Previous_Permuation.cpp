@@ -8,7 +8,7 @@ public:
         if(nums.size() <= 1) return nums;
         
         auto it = findBreakPoint(nums.begin(), nums.end());
-        sort(it, nums.end(), greater<int>());
+        reverse(it, nums.end());
         
         //round it 
         if(it == nums.begin()) return nums;
