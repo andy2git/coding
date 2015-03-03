@@ -17,7 +17,10 @@ public:
     
         while(*p){
             k = p;
-            while(*k != '\0' && *q !='\0' && *(k++) == *(q++));
+            while(*k != '\0' && *q !='\0' && *k == *q){
+                k++;
+                q++;
+            }
             if(*q == '\0') return p-source;
             else{
                 q = target;
