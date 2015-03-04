@@ -1,3 +1,4 @@
+/* this problem can be generalized to even number and only one odd number */
 class Solution {
 public:
     /**
