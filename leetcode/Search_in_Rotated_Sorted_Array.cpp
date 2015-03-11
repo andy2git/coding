@@ -14,10 +14,10 @@ public:
             if(A[m] == target) return m;
             
             if(A[m] <= A[h]){
-                if(target >= A[m] && target <= A[h]) l = m+1;
+                if(target > A[m] && target <= A[h]) l = m+1;
                 else h = m-1;
             }else{
-                if(target >= A[l] && target <= A[m]) h = m-1;
+                if(target >= A[l] && target < A[m]) h = m-1;
                 else l = m+1;
             }
         }

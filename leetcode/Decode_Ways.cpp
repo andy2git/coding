@@ -1,24 +1,25 @@
 class Solution {
 public:
     int numDecodings(string s) {
-        if(s == "" || s[0] == '0') return 0;
-        if(s.size() == 1) return 1;
-          
-        vector<int> dp(s.size()+1);
-        dp[s.size()] = 1;
-          
-        for(int j = s.size()-1; j>=0; j--){
-            if(s[j] == '0') {
-                dp[j] = 0;
-                continue;
-            }
-
-            if(j < s.size()-1 && atoi(s.substr(j, 2).c_str()) <= 26){
-                dp[j] = dp[j+1] + dp[j+2];
-            }else{
-                dp[j] = dp[j+1];
-            }
+        if(s.empty()) return 0;
+        int n = s.size();
+        
+        vector<int> t(n+1, 0);
+        t[0] = 1;
+        
+        for(int i = 1; i <= n; i++){
+            if(s[i-1] != '0') t[i] += t[i-1];
+            if(isValid(s, i-2)) t[i] += t[i-2];
         }
-        return dp[0];
+        
+        return t[n];
+    }
+private:
+    int isValid(string &s, int i){
+        if(i < 0) return false;
+        
+        int x = stoi(s.substr(i, 2));
+        if(x >= 10 && x <= 26) return true;
+        else return false;
     }
 };

@@ -13,47 +13,47 @@ public:
      * @return: Any topological order for the given graph.
      */
     vector<DirectedGraphNode*> topSort(vector<DirectedGraphNode*> graph) {
-        // write your code here
-        if(graph.empty()) return {};
-        
-        unordered_map<DirectedGraphNode *, int> degree;
-        fillDegree(degree, graph);
+        unordered_map<DirectedGraphNode *, int> dMap;
+        fillDegreeMap(dMap, graph);
         
         vector<DirectedGraphNode *> result;
-        while(!degree.empty()){
-            DirectedGraphNode *t = findFirstNZN(degree);
-            if(t == nullptr) throw runtime_error("no topological order exist!");
-            
+        vector<DirectedGraphNode *> zd;
+        
+        findFirstZDN(dMap, zd);
+        while(zd.size() > 0){
+            DirectedGraphNode *t = zd.back();
             result.push_back(t);
+            zd.pop_back();
             
-            for(int i = 0; i < t->neighbors.size(); i++){
-                degree[t->neighbors[i]]--;
+            for(auto ng : t->neighbors){
+                dMap[ng]--;
+                if(dMap[ng] == 0) zd.push_back(ng);
             }
-            degree.erase(t);
         }
         
         return result;
     }
-    
 private:
-    void fillDegree(unordered_map<DirectedGraphNode *, int> &degree, vector<DirectedGraphNode *> &graph){
+    void fillDegreeMap(unordered_map<DirectedGraphNode *, int> &dMap, vector<DirectedGraphNode *> &graph){
         for(int i = 0; i < graph.size(); i++){
-            DirectedGraphNode *t = graph[i];
-            if(degree.find(t) == degree.end()) degree[t] = 0;
+            DirectedGraphNode *x = graph[i];
+            if(dMap.find(x) == dMap.end()){
+                dMap[x] = 0;
+            }
             
-            for(int j = 0; j < t->neighbors.size(); j++){
-                degree[t->neighbors[j]]++;
+            for(auto ng: x->neighbors){
+                if(dMap.find(ng) == dMap.end()){
+                    dMap[ng] = 1;
+                }else{
+                    dMap[ng]++;
+                }
             }
         }
     }
     
-    DirectedGraphNode* findFirstNZN(unordered_map<DirectedGraphNode *, int> &degree){
-        for(auto it = degree.begin(); it != degree.end(); ++it){
-            if(it->second == 0) return it->first;
+    void findFirstZDN(unordered_map<DirectedGraphNode *, int> &dMap, vector<DirectedGraphNode *> &zd){
+        for(auto it = dMap.begin(); it != dMap.end(); ++it){
+            if(it->second == 0) zd.push_back(it->first);
         }
-        
-        return nullptr;
     }
 };
-
-

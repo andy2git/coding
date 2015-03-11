@@ -1,0 +1,130 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1344\cocoasubrtf720
+{\fonttbl\f0\fnil\fcharset134 STHeitiSC-Light;\f1\fnil\fcharset0 Geneva;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;\red43\green131\blue159;}
+\margl1440\margr1440\vieww30740\viewh15060\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs28 \cf0 \expnd0\expndtw0\kerning0
+\'cd\'b6\'c1\'cb
+\f1 2
+\f0 \'b8\'f6\'d4\'c2\'bc\'f2\'c0\'fa\'a3\'ac\'be\'cd\'d2\'bb\'b9\'b2\'b5\'e7\'c3\'e6\'c1\'cb
+\f1 3
+\f0 \'bc\'d2\'a1\'a3\'a1\'a3\'a1\'a3\'b3\'a4\'c6\'da\'c7\'f3\'c4\'da\'cd\'c6\'b0\'a1\'a3\'a1\'a3\'a1\'a3\'a1
+\f1 \
+\
+
+\f0 http://www.mitbbs.com/article_t/JobHunting/32838067.html\
+\'d2\'bb\'b8\'f6\'d0\'a1\'ca\'b1\'c7\'b0\'b5\'c4
+\f1 FB
+\f0 \'b5\'e7\'c3\'e6\'a3\'ac
+\f1  
+\f0 \'b5\'e7\'c3\'e6\'b5\'c4\'ca\'c7\'b8\'f6\'c0\'cf\'d3\'a1\'a3\'ac\'d2\'bb\'b9\'b2\'b3\'f6\'c1\'cb
+\f1 3
+\f0 \'b8\'f6\'cc\'e2\'a1\'a3
+\f1 \
+\
+1) 
+\f0 \'b8\'f8\'b8\'f6\'ca\'fd\'d7\'e9
+\f1 seq
+\f0 \'a3\'ac
+\f1  
+\f0 \'ba\'cd\'d2\'bb\'b8\'f6
+\f1 total
+\f0 \'a3\'ac\'d5\'d2
+\f1  if there is a contiguous sequence in seq \
+which sums to total.\
+
+\f0 \'b6\'bc\'ca\'c7\'d5\'fd\'ca\'fd\'a3\'ac
+\f1  
+\f0 \'b5\'da\'d2\'bb\'b4\'ce\'c3\'bb\'d7\'a2\'d2\'e2
+\f1 contiguous
+\f0 \'a3\'ac\'b8\'f8\'c1\'cb\'b8\'f6
+\f1 back tracking
+\f0 \'b5\'c4\'bd\'e2\'b7\'a8\'a1\'a3\'c8\'bb\'ba\'f3\'cb\'b5\'ca\'c7
+\f1 \
+contiguous
+\f0 \'a3\'ac
+\f1  
+\f0 \'b8\'f8\'c1\'cb
+\f1 \
+
+\f0 \'b8\'f6\'ce\'ac\'bb\'a4\'b4\'b0\'bf\'da\'b5\'c4\'bd\'e2\'b7\'a8\'a3\'ac\'b2\'bb\'b9\'fd\'b7\'b8\'c1\'cb\'b8\'f6\'d0\'a1\'b4\'ed\'ce\'f3\'a1\'a3\'ca\'b1\'bc\'e4\'b9\'fd\'c8\'a5\'c1\'cb\'b0\'eb\'d0\'a1\'ca\'b1\'a1\'a3\'a1\'a3\'a1\'a3\
+\
+Solution:\
+if the array is non-sorted, a brute force solution can solve the problem in O(n^2).\
+Another way to solve this problem is using prefix sum, and sort them. After sorted the prefixed sum, and we only need to find two prefix sums having a difference of target. \
+\
+\
+If the array is sorted, and we can maintain two indices: i and j.\
+\
+1. if(sum[i,j] < target) => j++;\
+2. if(sum[i,j] == target) => return true;\
+3. if(sum[i, j] > target) i++;\
+\
+int sum = 0;\
+int i = 0, j = 0;\
+while(j < n && i < j)\{\
+\
+\}\
+return false;\
+
+\f1 \
+\
+2) palindrome String\
+
+\f0 \'b1\'df\'bd\'b2\'b1\'df\'d0\'b4\'a3\'ac\'d0\'b4\'c1\'cb\'d2\'bb\'b0\'eb
+\f1 3
+\f0 \'b7\'d6\'d6\'d3\'ca\'b1\'cb\'b5\'ce\'d2\'c3\'f7\'b0\'d7\'c4\'e3\'b5\'c4\'cb\'bc\'c2\'b7\'c1\'cb\'a1\'a3\'bc\'cc\'d0\'f8\'cf\'c2\'d2\'bb\'b8\'f6\'cc\'e2\'b0\'c9\'a1\'a3
+\f1 \
+\
+3) decode ways. \
+
+\f0 \'b1\'df\'bd\'b2\'b1\'df\'d0\'b4\'a3\'ac\'d7\'f6\'c1\'cb
+\f1 7
+\f0 \'a3\'ac
+\f1 8
+\f0 \'b7\'d6\'d6\'d3\'b8\'d5\'d0\'b4\'cd\'ea\'be\'cd\'cb\'b5\'ce\'d2\'c3\'f7\'b0\'d7\'c4\'e3\'b5\'c4\'cb\'bc\'c2\'b7\'c1\'cb\'a3\'ac\'ba\'c3\'c1\'cb\'a1\'a3
+\f1 \
+\
+
+\f0 \'c4\'bf\'b2\'e2\'b5\'c3\'b9\'f2\'a1\'a3\'a1\'a3\'a1\'a3\'c7\'f3\'c6\'ed\'b8\'a3\'c5\'b6\'a1\'a3\'a1\'a3\'a1\'a3\'a1\'a3\
+\
+\
+Google phone interview\
+http://www.mitbbs.com/article_t/JobHunting/32905957.html\
+\
+\pard\pardeftab720
+
+\f1 \cf0 \expnd0\expndtw0\kerning0
+given int array A, R, permute A to make output array O as O[R[i]]=A[i]\
+e.g A=\{1,2,3\}, R=\{1,2,0\}=> O\{3,1,2\}\
+O(1) space 
+\f0 \'d4\'f5\'c3\'b4\'d7\'f6\'a3\'bf\expnd0\expndtw0\kerning0
+\
+\
+\pard\tx626\pardeftab626\pardirnatural
+
+\f2\fs26 \cf2 \kerning1\expnd0\expndtw0 \CocoaLigature0 void\cf0  swapArray(\cf3 vector\cf0 <\cf2 int\cf0 > &A, \cf3 vector\cf0 <\cf2 int\cf0 > &R, \cf2 int\cf0  i, \cf2 int\cf0  j)\{\
+    \cf3 swap\cf0 (A[\cf3 i\cf0 ], A[\cf3 j\cf0 ]);\
+    \cf3 swap\cf0 (R[\cf3 i\cf0 ], R[\cf3 j\cf0 ]);\
+\}\
+\
+\cf2 void\cf0  inPlacePermutation(\cf3 vector\cf0 <\cf2 int\cf0 > &A, \cf3 vector\cf0 <\cf2 int\cf0 > &R)\{\
+    \cf2 int\cf0  cnt = 0;\
+    \cf2 int\cf0  i = 0;\
+    \
+    \cf2 while\cf0  (cnt < A.\cf3 size\cf0 ()) \{\
+        \cf2 if\cf0 (R[\cf3 i\cf0 ] == i) \{\
+            cnt++;\
+            i++;\
+        \}\cf2 else\cf0 \{\
+            \cf3 swapArray\cf0 (A, R, i, R[\cf3 i\cf0 ]);\
+            cnt;\
+        \}\
+    \}\
+    \
+    \cf2 return\cf0 ;\
+\}\
+}

@@ -1,3 +1,55 @@
+/* similar to the majority vote solution */
+/**
+ * Solution:
+ * ---------------- > n/3
+ * --- --- ----
+ *  x   y   z
+ *
+ * x+y+z < n/3 
+ */
+class Solution {
+public:
+    /**
+     * @param nums: A list of integers
+     * @return: The majority number occurs more than 1/3.
+     */
+    int majorityNumber(vector<int> nums) {
+        if(nums.size() <= 2) throw runtime_error("wrong input!");
+        
+        int a, b;
+        int cntA = 0, cntB = 0;
+        
+        for(int i = 0; i < nums.size(); i++){
+            if(cntA > 0 && nums[i] == a){
+                cntA++;
+            } else if(cntB > 0 && nums[i] == b){
+                cntB++;
+            } else if(cntA == 0) {
+                a = nums[i];
+                cntA++;
+            }else if (cntB == 0){
+                b = nums[i];
+                cntB++;
+            }else{
+              cntA--;
+              cntB--;
+            }
+        }
+        
+        // have to check at the end to decide who is the one.
+        cntA = 0;
+        cntB = 0;
+        for(int x: nums){
+            if(x == a) cntA++;
+            if(x == b) cntB++;
+        }
+        
+        if(cntA > cntB) return a;
+        else return b;
+    }
+};
+
+/* partation based solution */
 class Solution {
 public:
     /**

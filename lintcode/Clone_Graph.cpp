@@ -27,10 +27,10 @@ public:
             UndirectedGraphNode *t = st.top();
             st.pop();
             
-            // copy new nodes
             for(int i = 0; i < (t->neighbors).size(); i++){
                 UndirectedGraphNode *p = t->neighbors[i];
                 if(map.find(p) == map.end()){
+                    // copy nodes
                     UndirectedGraphNode *q = new UndirectedGraphNode(p->label);
                     map[p] = q;
                     st.push(p);
