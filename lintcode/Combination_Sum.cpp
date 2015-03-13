@@ -6,37 +6,35 @@ public:
      * @return: A list of lists of integers
      */
     vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
-        // write your code here
-        sort(candidates.begin(), candidates.end());
+        if(candidates.empty()) return {};
         
+        sort(candidates.begin(), candidates.end());
         vector<vector<int>> result;
         vector<int> sofar;
-        combinationSumHelper(result, sofar, target, candidates, 0);
+        
+        combinationHelper(result, sofar, candidates, 0, target);
         return result;
     }
 private:
-    void combinationSumHelper(vector<vector<int>> &result, vector<int> &sofar,
-        int target, vector<int> &remain, int s){
-            
-        int sum = accumulate(sofar.begin(), sofar.end(), 0);    
+    void combinationHelper(vector<vector<int>> &result, vector<int> &sofar, vector<int> &remain, int k, int target){
+        int sum = accumulate(sofar.begin(), sofar.end(), 0);
         if(sum == target) {
             result.push_back(sofar);
             return;
         }
-        if(s == remain.size() || sum > target) return;
+        if(k == remain.size()) return;
         
-        int k = 0;
-        int x = remain[s];
-        while(sum + k*x <= target){
-            if(k > 0) sofar.push_back(x);
-            combinationSumHelper(result, sofar, target, remain, s+1);
-            k++;
+        int x = remain[k];
+        int t = 0;
+        while(sum + t*x <= target){
+            if(t > 0) sofar.push_back(x);
+            combinationHelper(result, sofar, remain, k+1, target);
+            t++;
         }
         
-        //restore sofar
-        while(k > 1){
+        while(t > 1){
             sofar.pop_back();
-            k--;
+            t--;
         }
     }
 };
