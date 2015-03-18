@@ -8,27 +8,27 @@
 class Solution {
 public:
     int longestValidParentheses(string s) {
-        if(s == "") return 0;
+        if(s.size() <= 1) return 0;
+        
         int n = s.size();
-        
         vector<int> t(n, 0);
-        int maxLen = 0;
-        
+        int ml = 0;
         for(int i = 1; i < n; i++){
-            if(s[i] == '(') t[i] = 0;
+            if(s[i] == '(') t[i] == 0;
             else{
-                int j = i-t[i-1]-1;
-                if(j >= 0 && s[j] == '('){
+                int p = i-t[i-1]-1;
+                if(p >= 0 && s[p] == '('){
                     t[i] += t[i-1]+2;
-                    if(j-1 >= 0) t[i] += t[j-1];
+                    if(p-1>=0) t[i] += t[p-1];
                 }
-                if(t[i] > maxLen) maxLen = t[i];
+                ml = max(ml, t[i]);
             }
         }
         
-        return maxLen;
+        return ml;
     }
 };
+
 
 /**
  * stack solution

@@ -1,34 +1,44 @@
+/* '/' is included in the path */
 class Solution {
 public:
     string simplifyPath(string path) {
-        if(path == "") return path;
+        if(path.empty()) return "";
         
-        vector<string> dirs;
+        vector<string> st;
         int i = 0;
-        int j;
         int n = path.size();
-        string t;
         
         while(i < n){
-            j = i+1;
-            while(j < n && path[j] != '/') j++;
-            t = path.substr(i, j-i);
+            string t = nextToken(path, i);
             
             if(t == "/" || t == "/."){
+                continue;
             }else if(t == "/.."){
-                if(!dirs.empty()) dirs.pop_back();
+                if(!st.empty()) st.pop_back();
             }else{
-                dirs.push_back(t);
+                st.push_back(t);
             }
-            i = j;
         }
         
-        if(dirs.empty()) return string("/");
+        if(st.empty()) return "/";
         
-        stringstream result;
-        for(auto dir : dirs){
-            result << dir;
+        stringstream ss;
+        for(auto x: st){
+            ss << x;
         }
-        return result.str();
+        
+        return ss.str();
+    }
+private:
+    string nextToken(string &st, int &i){
+        int n = st.size();
+        int j = i+1;
+        while(j < n && st[j] != '/') j++;
+        
+        string result;
+        if(i < n) result = st.substr(i, j-i);
+        i = j;
+        
+        return result;
     }
 };

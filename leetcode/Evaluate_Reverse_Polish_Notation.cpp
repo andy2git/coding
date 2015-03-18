@@ -1,34 +1,36 @@
 class Solution {
 public:
     int evalRPN(vector<string> &tokens) {
-        if(tokens.size() == 0) throw runtime_error("empty input!");
+        if(tokens.empty()) throw runtime_error("empty input!");
         
         stack<int> st;
-        for(int i = 0; i < tokens.size(); i++){
-            if(tokens[i] == "+" || tokens[i] == "-" || tokens[i] == "/" || tokens[i] == "*"){
-                opExec(st, tokens[i]);        
+        for(auto t:tokens){
+            if(isOperator(t)){
+                int x = getTop(st);
+                int y = getTop(st);
+                
+                if(t == "+") st.push(y+x);
+                else if(t == "-") st.push(y-x);
+                else if(t == "*") st.push(y*x);
+                else st.push(y/x);
             }else{
-                st.push(stoi(tokens[i]));
+                st.push(stoi(t));
             }
         }
-
-        if(st.empty()) throw runtime_error("wrong expr!");
-        else return st.top();
+        
+        if(st.size() == 1) return st.top();
+        else throw runtime_error("wrong expression!");
     }
 private:
-    void opExec(stack<int> &st, string &op){
-        int a, b;
-        if(st.empty()) throw runtime_error("wrong expr");
-        a = st.top();
-        st.pop();
-                
-        if(st.empty()) throw runtime_error("wrong expr");
-        b = st.top();
-        st.pop();
+    bool isOperator(string &st){
+        return (st=="+") || (st == "-") || (st == "*") || (st == "/");
+    }
     
-        if(op == "+") st.push(b+a);
-        if(op == "-") st.push(b-a);
-        if(op == "/") st.push(b/a);
-        if(op == "*") st.push(b*a);
+    int getTop(stack<int> &st){
+        if(st.empty()) throw runtime_error("wrong input");
+        int x = st.top();
+        st.pop();
+        
+        return x;
     }
 };

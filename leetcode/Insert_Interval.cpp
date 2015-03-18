@@ -10,12 +10,9 @@
 class Solution {
 public:
     vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
-        vector<Interval> result;
-        if(intervals.empty()){
-            result.push_back(newInterval);
-            return result;
-        }
+        if(intervals.empty()) return {newInterval};
         
+        vector<Interval> result;
         int i;
         for(i = 0; i < intervals.size(); i++){
             if(intervals[i].end < newInterval.start){
@@ -37,6 +34,78 @@ public:
         return result;
     }
 };
+
+/* not a lgn solution prefer the above method */
+struct Interval {
+    int start;
+    int end;
+    Interval() : start(0), end(0) {}
+    Interval(int s, int e) : start(s), end(e) {}
+};
+
+class Solution {
+public:
+    vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
+        if(intervals.empty()) return {newInterval};
+        
+        int i = ceil(intervals, newInterval.start);
+        int j = floor(intervals, newInterval.end);
+        
+        if(i <= j){
+            int x = min(newInterval.start, intervals[i].start);
+            int y = max(newInterval.end, intervals[j].end);
+            auto it = intervals.erase(intervals.begin()+i, intervals.begin()+j+1);
+            intervals.insert(it, {x, y});
+        }else{
+            intervals.insert(intervals.begin()+i, newInterval);
+        }
+        
+        return intervals;
+    }
+private:
+    // floor of the start to x
+    int floor(vector<Interval> &intervals, int x){
+        int l = 0;
+        int h = intervals.size()-1;
+        int ind = -1;
+        
+        while(l <= h){
+            int m = l + (h-l)/2;
+            int t = intervals[m].start;
+            
+            if(t == x) return m;
+            else if(t > x) h = m-1;
+            else {
+                ind = m;
+                l = m+1;
+            }
+        }
+        
+        return ind;
+    }
+    
+    // ceil of the end to the x
+    int ceil(vector<Interval> &intervals, int x){
+        int l = 0;
+        int h = intervals.size()-1;
+        int ind = -1;
+        
+        while(l <= h){
+            int m = l + (h-l)/2;
+            int t = intervals[m].end;
+            
+            if(t == x) return m;
+            else if(t < x) l = m+1;
+            else {
+                ind = m;
+                h = m-1;
+            }
+        }
+        
+        return ind;
+    }
+};
+
 
 
 /**

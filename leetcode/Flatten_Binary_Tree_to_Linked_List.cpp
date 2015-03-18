@@ -10,28 +10,27 @@
 class Solution {
 public:
     void flatten(TreeNode *root) {
-        if(root == nullptr) return;
-        if(root->left == nullptr && root->right == nullptr) return;
+        if(!root) return;
+        if(!root->left && !root->right) return;
         
         stack<TreeNode *> st;
         st.push(root);
-        TreeNode *p = nullptr;
         TreeNode *pre = nullptr;
         
         while(!st.empty()){
-            p = st.top();
+            TreeNode *cur = st.top();
             st.pop();
             
-            if(pre){
+            if(pre) {
                 pre->left = nullptr;
-                pre->right = p;
+                pre->right = cur;
             }
-            pre = p;
+            if(cur->right) st.push(cur->right);
+            if(cur->left) st.push(cur->left);
             
-            if(p->right) st.push(p->right);
-            if(p->left) st.push(p->left);
+            pre = cur;
         }
         
-        pre->left = pre->right = nullptr;
+        // last node must be a leaf node, so it is okay to leave it out
     }
 };

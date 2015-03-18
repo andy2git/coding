@@ -10,29 +10,32 @@
 class Solution {
 public:
     vector<string> restoreIpAddresses(string s) {
+        if(s.empty()) return {};
+        
         vector<string> result;
-        
-        restore_ip_helper(result, "", s, 0);
-        
+        restoreIpHelper(result, "", s, 0, 0);
         return result;
     }
+    
 private:
-    void restore_ip_helper(vector<string> &result, string sofar, string remain, int k){
-        if(k == 3){
-            if(!remain.empty() && (remain[0] == '0'||  stol(remain) > 255)) return;
-            else {
-                result.push_back(sofar.substr(1) + '.' + remain);
-                return;
-            }
-        }
+    void restoreIpHelper(vector<string> &result, string sofar, string &remain, int k, int m){
+        if(k == 4 && m == remain.size()){
+            result.push_back(sofar);
+            return;
+        }else if(k == 4 && m < remain.size()){
+            return;
+        }else if(m == remain.size() && k < 4) return;
         
-        int len = std::min(3, (int)remain.length());
-        for(int i = 0; i < len; i++){
-            if(remain[0] == '0') break;
-            string t = remain.substr(0, i+1);
-            if(stoi(t) <= 255){
-                restore_ip_helper(result, sofar + "." + t, remain.substr(i+1), k+1);
-            }else break;
+        int n = remain.size();
+        for(int i = m; i < min(m+3, n); i++){
+            string st = remain.substr(m, i-m+1);
+            if(i > m && remain[m] == '0') break;
+            
+            int t = stoi(st);
+            if(t <= 255){
+                if(k == 3) restoreIpHelper(result, sofar+st, remain, k+1, i+1);
+                else restoreIpHelper(result, sofar+st+".", remain, k+1, i+1);
+            }
         }
     }
 };
