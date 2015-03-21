@@ -25,13 +25,11 @@ int main() {
 
 
 
-
-
 // Second Example: Racing condition
 class Fctor {
 	ofstream& m_str;
 public:
-	Fctor(ofstream& s):m_str(s) {}   // Reference member can only be initialized
+	Fctor(ofstream& s):m_str(s) {}   // Reference member can only be initialized once, and it has to be in init list in this case
 	void operator()() {
 		for (int i=0; i>-100; i--)
 			m_str << "from t1: " << i << endl;

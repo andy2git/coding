@@ -469,8 +469,7 @@ int main() {
 //f.Output::open();
 
 
-
-
+// Virtual inheritence can solve this diamond hierarchy problems
 
 class File {            //         File
    public:              //         /  \        -
@@ -635,6 +634,8 @@ class Dog {
 class Yellowdog : public Dog{
    public:
       virtual void barks() { cout << "I am a yellow dog.\n";}
+      // for protected method in the super class, subclass only inherits the implementation,
+      // but not the interface. If you need to have its interface, you have to define your own.
       void iSleep() { sleep(); }
 };
 

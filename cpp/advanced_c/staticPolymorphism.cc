@@ -42,7 +42,7 @@ int main() {
  * 2. Base class defines a "generic" algorithm that's used by derived class
  * 3. The "generic" algorithm is customized by the derived class
  */
-// TMP: Template Metaprogramming
+// TMP: Template Metaprogramming - move runtime computation to compiling time
 template <typename T> class Generic_Parser {
    public:
    void parse_preorder(TreeNode* node) {
@@ -81,7 +81,8 @@ int main() {
 
 
 
-// Generalized Static Polymorphism
+// Generalized Static Polymorphism - all the assignment or comparison happens in compile time, so people call it static polymorphism.
+// which is different from the TMP mentioned earlier
 template<typename T>
 T Max(vector<T> v) {
    T max = v[0];
@@ -92,8 +93,3 @@ T Max(vector<T> v) {
    }
    return max;
 }
-
-  
-
-
-
