@@ -1,40 +1,35 @@
 class Solution {
 public:
     void reverseWords(string &s) {
-        if(s=="") return;
-        
-        reverse_str(s, 0, s.size()-1);
+        if(s.empty()) return;
+        int n = s.size();
         
         int i = 0;
-        int j = 0;
-        int n = s.size();
-        int k = 0;
+        int j = n-1;
+        reverseStr(s, i, j);
         
-        while(j < n){
-            while(j < n && s[j] == ' ') j++;
+        int k = 0;
+        int p = 0;
+        while(i < n){
+            while(i < n && s[i] == ' ') i++;
+            while(i < n && s[i] != ' ') s[k++] = s[i++];
             
-            k = i;
-            while(j < n && s[j] != ' '){
-                s[i++] = s[j++];
-            }
-            if(i > k){
-                reverse_str(s, k, i-1);
-                s[i++] = ' ';
+            // at least a word with more than one char
+            if(k > p){
+                reverseStr(s, p, k-1);
+                s[k++] = ' ';
+                p = k;
             }
         }
-        
-        if(i>0) s.resize(i-1);
+        // remove the last ' '
+        if(k > 0) s.resize(k-1);
         else s.resize(0);
     }
+
 private:
-    // [s, e]
-    void reverse_str(string &st, int s, int e){
-        if(s > e) return;
-        
-        while(s < e){
-            swap(st[s], st[e]);
-            s++;
-            e--;
+    void reverseStr(string &s, int i, int j){
+        while(i < j){
+            swap(s[i++], s[j--]);
         }
     }
 };

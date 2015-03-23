@@ -1,45 +1,17 @@
 class Solution {
 public:
-    char *strStr(char *haystack, char *needle) {
-        if(!*needle) return haystack;
-        if(!*haystack) return nullptr;
+    int strStr(char *haystack, char *needle) {
+        int n = strlen(haystack);
+        int m = strlen(needle);
         
-        int len = 0;
-        char *r = needle;
-        while(*r){
-            len++;
-            r++;
-        }
-        
-        char *h = haystack;
-        while(*h){
-            char *p = h;
-            if(!is_valid(p, len)) break;
-            char *q = needle;
-            
-            while(*p && *q){
-                if(*p == *q) {
-                    p++;
-                    q++;
-                }else{
-                    break;
-                }
+        for(int i = 0; ;i++){
+            for(int j = 0; ;j++){
+                if(j == m) return i;
+                if(i+j == n) return -1;
+                if(needle[j] != haystack[i+j]) break;
             }
-            if(!*q) return h;
-            
-            h++;
         }
         
-        return nullptr;
-    }
-private:
-    bool is_valid(char *p, int steps){
-        
-        while(steps > 1){
-            p++;
-            if(!*p) return false;
-            steps--;
-        }
-        return true;
+        return -1;
     }
 };
