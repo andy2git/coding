@@ -6,6 +6,49 @@ public:
      * @return: The majority number
      */
     int majorityNumber(vector<int> nums, int k) {
+        unordered_map<int, int> map;
+        
+        for(auto x: nums){
+            if(map.size() < k-1){
+                map[x]++;
+            }else{
+                if(map.find(x) == map.end()){
+                    //cross out chars
+                    for(auto it = map.begin(); it != map.end();){
+                        --(it->second);
+                        if(it->second == 0) it = map.erase(it);
+                        else ++it;
+                    }
+                }else{
+                    map[x]++;
+                }
+            }
+        }
+
+        
+        for(auto it = map.begin(); it != map.end(); ++it){
+            it->second = 0;
+        }
+        
+        for(auto x : nums){
+            if(map.find(x) != map.end()){
+                map[x]++;
+                if(map[x] > nums.size()/k) return x;
+            }
+        }
+        return -1;
+    }
+};
+
+
+class Solution {
+public:
+    /**
+     * @param nums: A list of integers
+     * @param k: As described
+     * @return: The majority number
+     */
+    int majorityNumber(vector<int> nums, int k) {
         int n = nums.size();
         vector<int> cand(k, 0);
         
