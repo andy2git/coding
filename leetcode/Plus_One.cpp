@@ -2,24 +2,23 @@ class Solution {
 public:
     vector<int> plusOne(vector<int> &digits) {
         int cbit = 1;
-        vector<int> result(digits);
-        
         for(int i = digits.size()-1; i >= 0; i--){
-            if(digits[i] == 9){
-                if(cbit == 1){
-                    cbit = 1;
-                    result[i] = 0;
-                }
-            }else{
-                if(cbit == 1){
-                    cbit = 0;
-                    result[i]++;
-                }
-            }
+            digits[i] = addDigit(digits[i], cbit);
         }
         
-        if(cbit == 1) result.insert(result.begin(), 1);
+        if(cbit == 1) digits.insert(digits.begin(), 1);
         
-        return result;
+        return digits;
+    }
+private:
+    int addDigit(int x, int &cbit){
+        int t = x+cbit;
+        cbit = 0;
+        
+        if(t >= 10){
+            cbit = 1;
+            t %= 10;
+        }
+        return t;
     }
 };

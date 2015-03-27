@@ -16,12 +16,11 @@ public:
             p *= nums[i];
             rp.push_back(p);
         }
-        reverse(rp.begin(), rp.end());
-        
+
         p = 1;
         for(int i = 0; i < n; i++){
             if(i == n-1) result.push_back(p);
-            else result.push_back(p*rp[i+1]);
+            else result.push_back(p*rp[n-i-2]);
             
             p *= nums[i];
         }

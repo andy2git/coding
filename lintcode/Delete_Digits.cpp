@@ -23,6 +23,27 @@ public:
     }
     
 private:
+    // another version 
+    void delOneDigit(string &A){
+       int i = 0;
+       int n = A.size();
+       
+       while(i < n-1 && A[i] <= A[i+1]) i++;
+       
+       //at the end, delete the last char
+       if(i == n-1) {
+           A.resize(n-1);
+           return;
+       }
+       
+       // delete the last char in the increasing chars
+       while(i < n-1) {
+           A[i] = A[i+1];
+           i++;
+       }
+       A.resize(n-1);
+    }
+
     void delOneDigit(string &A){
         bool flag = false;
         

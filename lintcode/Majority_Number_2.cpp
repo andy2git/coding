@@ -1,11 +1,9 @@
 /* similar to the majority vote solution */
 /**
- * Solution:
- * ---------------- > n/3
- * --- --- ----
- *  x   y   z
- *
- * x+y+z < n/3 
+ * Solution: every char cross will eliminate 3 different elements. 
+ * So an element which occurs more than n/3 times will definitely 
+ * be left.
+ * 
  */
 class Solution {
 public:
