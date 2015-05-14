@@ -7,39 +7,36 @@
  *     Interval(int s, int e) : start(s), end(e) {}
  * };
  */
-
+ 
+bool intervalCmp(Interval &lhs, Interval &rhs){
+    return lhs.start < rhs.start;
+}
+ 
 class Solution {
 public:
-    vector<Interval> merge(vector<Interval> &intervals) {
-        if(intervals.empty()) return vector<Interval>();
+    vector<Interval> merge(vector<Interval> &A) {
+        if(A.empty()) return {};
         
-        sort(intervals.begin(), intervals.end(), Solution::interval_cmp);
+        
+        sort(A.begin(), A.end(), intervalCmp);
+        
+        int cInd = 0;
+        int nInd = 1;
         
         vector<Interval> result;
-        int i = 1;
-        int n = intervals.size();
-        int s, e;
-        
-        s = intervals[0].start;
-        e = intervals[0].end;
-        while(i < n){
-            if(intervals[i].start <= e){
-                e = max(e, intervals[i].end);
+        while(nInd < A.size()){
+            if(A[cInd].end >= A[nInd].start){
+                A[cInd].end = max(A[cInd].end, A[nInd].end);
+                nInd++;
             }else{
-                result.push_back(Interval(s, e));
-                s = intervals[i].start;
-                e = intervals[i].end;
+                result.push_back(A[cInd]);
+                cInd = nInd;
+                nInd++;
             }
-            
-            i++;
         }
-        result.push_back(Interval(s, e));
+        
+        result.push_back(A[cInd]);
         
         return result;
     }
-private:
-    static bool interval_cmp(const Interval &lhs, const Interval &rhs){
-        return lhs.start < rhs.start;
-    }
 };
-

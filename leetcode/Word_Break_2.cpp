@@ -43,3 +43,43 @@ private:
         }
     }
 };
+
+// backtracking solution
+class Solution {
+public:
+    vector<string> wordBreak(string s, unordered_set<string> &dict) {
+        if(s.empty() || dict.empty()) return {};
+        
+        
+        if(!containsSolution(s, dict)) return{};
+        
+        vector<string> result;
+        wbHelper(result, "", s, 0, dict);
+        return result;
+    }
+    
+private:
+    bool containsSolution(string &s, unordered_set<string> &dict){
+        int n = s.size();
+        for(int i = n-1; i >= 0; i--){
+            if(dict.find(s.substr(i, n-i)) != dict.end()) return true;
+        }
+        
+        return false;
+    }
+    
+    
+    void wbHelper(vector<string> &result, string sofar, string remain, int s, unordered_set<string> &dict){
+        if(s == remain.size()){
+            if(!sofar.empty()) result.push_back(sofar.substr(1));
+            return;
+        }
+        
+        for(int i = s; i < remain.size(); i++){
+            string t = remain.substr(s, i-s+1);
+            if(dict.find(t) != dict.end()){
+                wbHelper(result, sofar+" "+t, remain, i+1, dict);
+            }
+        }
+    }
+};

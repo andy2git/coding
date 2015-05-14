@@ -1,25 +1,24 @@
 class Solution {
 public:
     string countAndSay(int n) {
-        string st = "1";
-        if(n == 1) return st;
+        if(n <= 0) throw runtime_error("invalid input!");
         
-        stringstream ss; 
+        string st = "1";
         while(n > 1){
+            stringstream ss;
             int cnt = 1;
-            ss.str("");
-            ss.clear();
             for(int i = 1; i < st.size(); i++){
-                if(st[i] == st[i-1]){
+                if(st[i-1] == st[i]){
                     cnt++;
                 }else{
                     ss << cnt << st[i-1];
                     cnt = 1;
                 }
             }
-            ss << cnt << st[(int)st.size()-1];
-            st = ss.str();
             
+            // last part of elements
+            ss << cnt << st[st.size()-1];
+            st = ss.str();
             n--;
         }
         

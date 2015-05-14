@@ -1,3 +1,4 @@
+/* time complexity: O(n) and O(k) space */
 class Solution {
 public:
     /**
@@ -40,6 +41,7 @@ public:
     }
 };
 
+/* Time complexity: O(nk) and space is O(k) */
 
 class Solution {
 public:

@@ -39,7 +39,9 @@ public:
                         minLen = k-i+1;
                         ind = i;
                     }
+
                     // look for next candidate
+                    sMap[x]--;
                     i++;
                     cnt--;
                 }

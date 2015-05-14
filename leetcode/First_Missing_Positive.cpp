@@ -31,3 +31,32 @@ public:
         return n+1;
     }
 };
+
+
+class Solution {
+public:
+    int firstMissingPositive(int A[], int n) {
+        if(n == 0) return 1;
+        
+        for(int i= 0; i < n; i++){
+            if(A[i] <= 0) A[i] = n+2;
+        }
+        
+        // use the above method for cleaner solution
+        int i = 0;
+        while(i < n){
+            if(A[i] > 0 && A[i] <= n) {
+                int t = A[i]; 
+                if(A[t-1] > 0){
+                    swap(A[i], A[t-1]);
+                    A[t-1] = -1;
+                }else i++;
+            }else i++;
+        }
+        
+        for(int i = 0; i < n; i++){
+            if(A[i] > 0) return i+1;
+        }
+        return n+1;
+    }
+};
