@@ -15,7 +15,9 @@ public class Solution {
      * @return true if they are identical, or false.
      */
     public boolean isIdentical(TreeNode a, TreeNode b) {
-        if(a == null && b == null) return true;
+        // 1. a and b is the same tree
+        // 2. a == b == null
+        if(a == b) return true;
         if(a == null || b == null) return false;
         
         return a.val == b.val 

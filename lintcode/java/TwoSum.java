@@ -10,7 +10,7 @@ public class Solution {
         Map<Integer, Integer> map = new HashMap<>();
         for(int i = 0; i < numbers.length; i++){
             int x = target - numbers[i];
-            if(map.get(x) != null){
+            if(map.containsKey(x)){
                 return new int[]{map.get(x), i+1};
             }else{
                 map.put(numbers[i], i+1);
