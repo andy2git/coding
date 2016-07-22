@@ -5,6 +5,7 @@ public:
         
         stack<char> st;
         for(int i = 0; i < s.length(); i++){
+            // make it a function to isOpen(x)
             if(s[i] == '(' || s[i] == '[' || s[i] == '{'){
                 st.push(s[i]);
             }else{
@@ -12,7 +13,7 @@ public:
                 
                 char t = st.top();
                 st.pop();
-                
+                // TODO: make it a function called isMatch(x, y)
                 if(s[i] == ']' && t != '[') return false;
                 if(s[i] == ')' && t != '(') return false;
                 if(s[i] == '}' && t != '{') return false;
