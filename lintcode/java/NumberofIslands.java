@@ -1,3 +1,5 @@
+/* numIslands problem is different from the word search in matrix problem
+ * where you need to reset the cells which are marked */
 public class Solution {
     /**
      * @param grid a boolean 2D matrix
