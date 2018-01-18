@@ -29,3 +29,5 @@ class Solution {
         else return search(root.left, t);
     }
 }
+
+/** Other solution is to treat the BST as a sorted array, and we can use two pts to iterate */
