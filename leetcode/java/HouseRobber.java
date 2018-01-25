@@ -1,3 +1,9 @@
+/**
+ * s[i]: max $ robbed till nums[i] position
+ * if we define s[i] as the max $ robbed with nums[i], then we also need to keep an variable
+ * maintaining global max.
+ * 
+ **/
 public class Solution {
     public int rob(int[] nums) {
         if(nums == null) throw new IllegalArgumentException("xxx");
