@@ -3,6 +3,7 @@
  * if we define s[i] as the max $ robbed with nums[i], then we also need to keep an variable
  * maintaining global max.
  * 
+ * See *Min Cost Climbing Stairs* for comparisiont
  **/
 public class Solution {
     public int rob(int[] nums) {
