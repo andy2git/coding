@@ -30,7 +30,7 @@ public:
         
         // Observation: all max subarray must end with a[i]
         // 
-        // s[i] = max(s[i-1] + a[i], 0)
+        // s[i] = max(s[i-1] + a[i], a[i], 0)
         // s[i]: max subarray including a[i]
         // ---------------------------------
         //   1. prefix of s[i] cannot be < 0
