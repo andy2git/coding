@@ -8,21 +8,17 @@ class Solution {
         boolean[][] t = new boolean[m][n];
         for(int i = 0; i < m; i++) {
             for(int j = 0; j < n; j++) {
-                if(board[i][j] == word.charAt(0)){
+                if(board[i][j] == word.charAt(0)){ 
                     t[i][j] = true;
-                    return wsh(board, t, i-1, j, word, 1)
-                        || wsh(board, t, i+1, j, word, 1)
-                        || wsh(board, t, i, j-1, word, 1)
-                        || wsh(board, t, i, j+1, word, 1);
+                    if(wsh(board, t, i, j, word, 0)) return true;
+                    t[i][j] = false;
                 }
-                t[i][j] = false;
             }
         }
         return false;
     }
     
     private boolean wsh(char[][] A, boolean[][] t, int i, int j, String w, int k) {
-        if(A[i][j] != w.charAt(k) || t[i][j] == true) return false;
         if(k == w.length()-1) return true;
         
         int m = A.length;
