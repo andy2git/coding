@@ -7,6 +7,13 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+/* If one of the node does not exist in the tree, then it is hard to differentiate
+  between this case with the following one.
+   p
+  /
+ q
+ 
+*/
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null) return null;
