@@ -18,16 +18,13 @@
 public class NestedIterator implements Iterator<Integer> {
     private Deque<NestedInteger> st = new ArrayDeque<>();
     
+    // Ideally, if we can pass NestedInteger in, we can make it directly pre-order traversal
     public NestedIterator(List<NestedInteger> nestedList) {
-        for(NestedInteger x : nestedList) {
-            st.addLast(x);
-        }    
+       revPush(st, nestedList);
     }
 
     @Override
     public Integer next() {
-        // add extra check to make sure we can pop()
-        // or throw NoSuchElementException()
         return st.pop().getInteger();
     }
 
@@ -37,11 +34,15 @@ public class NestedIterator implements Iterator<Integer> {
             NestedInteger ni = st.peek();
             if (ni.isInteger()) return true;
             List<NestedInteger> list = st.pop().getList();
-            for(int i = list.size()-1; i >= 0; i--){
-                st.push(list.get(i));
-            }
+            revPush(st, list);
         }
         return false;
+    }
+    
+    private void revPush(Deque<NestedInteger> st, List<NestedInteger> list) {
+        for(int i = list.size()-1; i >= 0; i--) {
+            st.push(list.get(i));
+        }
     }
 }
 
