@@ -3,12 +3,10 @@ class Solution {
         if(A == null) throw new IllegalArgumentException("xx");
         if(A.length == 0) return;
         int n = A.length;
-        // double check to make sure A is of size n x n 
-
-        // switch rows
-        for(int i = 0; i < n/2; i++) {
-            swapRow(A, i, n-i-1);
-        }    
+        int i = 0;
+        int j = n-1;
+        while(i < j) swapRow(A, i++, j--);
+        
         // switch diagonally
         swapDiagonally(A);
     }
@@ -32,5 +30,4 @@ class Solution {
             }    
         }
     }
-    
 }

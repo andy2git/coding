@@ -8,6 +8,11 @@ private static class DirectedGraphNode {
         }
     }
 
+/* Assume graph might be not connected,
+ * 1
+ *
+ * x -> y
+ */
 public class Solution {
     public List<DirectedGraphNode> topSort(List<DirectedGraphNode> graph) {
         Map<DirectedGraphNode, Integer> dMap = fillDegreeMap(graph);
