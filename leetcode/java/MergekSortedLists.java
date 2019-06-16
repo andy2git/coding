@@ -7,26 +7,25 @@
  * }
  */
 class Solution {
-   public ListNode mergeKLists(ListNode[] lists) {
-        if (lists == null) return null;
-        // add all first option to the PQ
-        PriorityQueue<ListNode> pq = new PriorityQueue<>((o1, o2) -> {
-            if (o1.val > o2.val) return 1;
-            else if (o1.val == o2.val) return 0;
-            else return -1;
-        });
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0) return null;
+        if(lists.length == 1) return lists[0];
         
-        for (ListNode list : lists) {
-            if (list != null) pq.offer(list);
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(l -> l.val));
+        
+        for(ListNode l : lists) {
+            if (l != null) pq.offer(l);
         }
+        
         ListNode dummy = new ListNode(0);
-        ListNode d = dummy;
+        ListNode p = dummy;
         while (!pq.isEmpty()) {
-            ListNode p = pq.poll();
-            d.next = p;
-            d = d.next;
-            if (p.next != null) pq.offer(p.next);
+            ListNode t = pq.poll();
+            p.next = t;
+            p = p.next;
+            if(t.next != null) pq.offer(t.next);
         }
+        
         return dummy.next;
     }
 }
