@@ -8,17 +8,30 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        if(head == null) return null;
-        ListNode pre = null;
-        ListNode cur = head;
-        ListNode next = cur.next;
-        while(cur != null) {
-            cur.next = pre;
-            pre = cur;
-            cur = next;
-            if(cur == null) break;
-            else next = cur.next;
+        ListNode p = null;
+        ListNode q = head;
+        ListNode r = null;
+        
+        while(q != null) {
+            r = q.next;
+            q.next = p;
+            p = q;
+            q = r;
         }
-        return pre;
+        return p;
     }
+}
+
+// Recursive version - walk through the recursive stack
+// recursive solution is actually reverse the pointer in a right -> left fashion.
+// Iterative appache is going from left -> right
+public ListNode reverseList(ListNode head) {
+    // there are two stop conditions in this case 
+    if (head == null || head.next == null) return head;
+
+    ListNode p = reverseList(head.next);
+    // this is it!!
+    head.next.next = head;
+    head.next = null;
+    return p;
 }
