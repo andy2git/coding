@@ -38,3 +38,44 @@ class Solution {
         return map;
     }
 }
+
+// java 8 solution
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if(prerequisites == null || prerequisites.length == 0) return true;
+
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        Map<Integer, Integer> dMap = new HashMap<>();
+        fillInGraphAndDegree(prerequisites, graph, dMap);
+
+        Queue<Integer> queue = new ArrayDeque<>();
+        for(int i = 0; i < numCourses; i++) {
+            if(!dMap.containsKey(i)){
+                queue.offer(i);
+            }
+        }
+
+        int count = 0;
+        while(!queue.isEmpty()) {
+            Integer t = queue.poll();
+            for(Integer x : graph.getOrDefault(t, Collections.emptyList())){
+                Integer degree = dMap.merge(x, -1, Integer::sum);
+                if(degree == 0) queue.offer(x);
+            }
+            count++;
+
+        }
+
+        return count == numCourses;
+    }
+
+    private void fillInGraphAndDegree(int[][] edges, Map<Integer, List<Integer>> graph, Map<Integer, Integer> dMap) {
+        for(int[] edge: edges) {
+            graph.merge(edge[1], new ArrayList<>(Collections.singleton(edge[0])), (x, y) ->  {
+                x.add(edge[0]);
+                return x;
+            });
+            dMap.merge(edge[0], 1, Integer::sum);
+        }
+    }
+}

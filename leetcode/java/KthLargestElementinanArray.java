@@ -33,3 +33,43 @@ class Solution {
         A[j] = t;
     }
 }
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        
+        return kthHelper(nums, 0, nums.length-1, k);
+    }
+    
+    private int kthHelper(int[] A, int s, int e, int k) {
+        // base case
+        if(s > e) return -1;
+        
+        int p = partition(A, s, e);
+        // figure out ranking in range [s, e]
+        int r = p - s + 1;
+        if(k == r) return A[p];
+        else if (k < r) return kthHelper(A, s, p-1, k);
+        else return kthHelper(A, p+1, e, k-r);
+    } 
+    
+    private int partition(int[] A, int s, int e) {
+        int t = s+1;
+        int x = A[s];
+        while(t <= e) {
+            if(A[t] >= x) t++;
+            else {
+                swap(A, t, e);
+                e--;
+            }
+        }
+        swap(A, s, e);
+        return e;
+    }
+    
+    private void swap(int[] A, int x, int y) {
+        int t = A[x];
+        A[x] = A[y];
+        A[y] = t;
+    }
+    
+}

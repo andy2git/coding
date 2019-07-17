@@ -23,3 +23,24 @@ class Solution {
         return d.next;
     }
 }
+
+// recursive solution
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null) return head;
+        
+        ListNode t = head.next;
+        head.next = swapPairs(head.next.next);
+        t.next = head;
+        return t;
+    }
+}
