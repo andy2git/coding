@@ -8,17 +8,17 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        ListNode p = null;
-        ListNode q = head;
-        ListNode r = null;
+        ListNode pre = null;
+        ListNode cur = head;
+        ListNode next = null;
         
-        while(q != null) {
-            r = q.next;
-            q.next = p;
-            p = q;
-            q = r;
+        while(cur != null) {
+            next = cur.next;
+            cur.next = pre;
+            cur = next;
+            pre = cur;
         }
-        return p;
+        return pre;
     }
 }
 
@@ -30,7 +30,8 @@ public ListNode reverseList(ListNode head) {
     if (head == null || head.next == null) return head;
 
     ListNode p = reverseList(head.next);
-    // this is it!!
+    // this is it!! head has not been modified at all, so we head.next still points
+    // to the end of reversed list
     head.next.next = head;
     head.next = null;
     return p;
