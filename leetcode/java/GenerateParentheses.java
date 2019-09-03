@@ -16,4 +16,16 @@ class Solution {
         if(l < n) gph(result, sofar+"(", l+1, r, n);
         if(l > r) gph(result, sofar+")", l, r+1, n);
     }
+
+    private void gp(List<String> result, String sofar, int l, int r) {
+        // stop condition
+        if (r == 0) {
+            result.add(sofar);
+            return;
+        }
+        if (l < r) {
+            gp(result, sofar + ")", l, r - 1);
+            if (l > 0) gp(result, sofar + "(", l - 1, r);
+        } else gp(result, sofar + "(", l - 1, r);
+    }
 }
