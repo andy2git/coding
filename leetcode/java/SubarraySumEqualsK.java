@@ -1,3 +1,6 @@
+/**
+ * Similar problem: max subarray, which has other better solutions. RERFER to that problem for details
+ */
 class Solution {
     public int subarraySum(int[] nums, int k) {
         if(nums == null || nums.length == 0) return 0;
