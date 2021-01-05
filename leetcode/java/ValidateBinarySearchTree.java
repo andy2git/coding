@@ -23,15 +23,7 @@ class Solution {
     }
 }
 
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
+// Solution#2
 class Solution {
     public boolean isValidBST(TreeNode root) {
         return isBST(root, null, null);
@@ -53,5 +45,27 @@ class Solution {
     private boolean less(int x, Integer y){
         if(y == null) return true;
         else return x < y;
+    }
+}
+
+// Solution#3
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        long pre = Long.MIN_VALUE;
+        Deque<TreeNode> st = new ArrayDeque<>();
+        TreeNode p = root;
+        while (p != null || !st.isEmpty()) {
+            if(p != null) {
+                st.push(p);
+                p = p.left;
+            }else {
+                TreeNode t = st.pop();
+                if(pre >= t.val) return false;
+                pre = t.val;
+                if(t.right != null) p = t.right;
+            }
+        }
+        return true;
     }
 }

@@ -13,6 +13,7 @@ class Solution {
     }
     
     private TreeNode stbh(int[] A, int s, int e) {
+        // this s > e is needed 
         if(s > e) return null;
         if(s == e) return new TreeNode(A[s]);
         

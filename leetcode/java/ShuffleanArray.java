@@ -18,9 +18,7 @@ class Solution {
     public int[] shuffle() {
         for(int i = 1; i < nums.length; i++) {
             int k = rand.nextInt(i);
-            int t = nums[k];
-            nums[k] = nums[i];
-            nums[i] = t;
+            swap(nums, k, i);
         }
         return nums;
     }

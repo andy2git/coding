@@ -6,6 +6,7 @@ class Solution {
         // check it only contains 1
         if((num&(num-1)) != 0) return false;
         
+        // 4^n = 2^2n, so we only need to check if we have even number of 1s for num-1
         // check we only have even number of 0s
         num = num-1;
         int cnt = 0;

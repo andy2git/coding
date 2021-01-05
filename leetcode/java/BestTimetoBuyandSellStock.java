@@ -22,3 +22,34 @@ class Solution {
         return result;
     }
 }
+
+// Same solution as above
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices == null || prices.length == 0) return 0;
+        int[] df = priceDiff(prices);
+        return maxSubarray(df);
+    }
+    
+    // s[i]: max subarray sum including A[i-1]
+    private int maxSubarray(int[] A) {
+        int n = A.length;
+        int[] s = new int[n+1];
+        int max = s[0];
+        for(int i = 1; i <=n; i++) {
+            s[i] = Math.max(0, Math.max(s[i-1] + A[i-1], A[i-1]));
+            max = Math.max(max, s[i]);
+        }
+        return max;
+    }
+    
+    private int[] priceDiff(int[] p) {
+        int n = p.length;
+        int[] df = new int[n-1];
+        for (int i =0; i < n-1; i++) {
+            df[i] = p[i+1] - p[i];
+        }
+        return df;
+    }
+    
+}
