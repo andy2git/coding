@@ -29,9 +29,9 @@ public class Solution {
             DirectedGraphNode n = queue.poll();
             result.add(n);
             for(DirectedGraphNode x : n.neighbors) {
- 		// dMap[x]--;
-		// dMap.merge(x, -1, Integer::sum); 
-                dMap.put(x, dMap.get(x)-1);
+ 		        v// dMap[x]--;
+                //dMap.put(x, dMap.get(x)-1);
+		        dMap.merge(x, -1, Integer::sum); 
                 if(dMap.get(x) == 0) {
                     queue.offer(x);
                 }

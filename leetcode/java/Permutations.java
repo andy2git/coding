@@ -23,6 +23,7 @@ class Solution {
             List<Integer> left = new ArrayList<>(cands);
             left.remove(x);
             ph(result, sofar, left);
+            // sofar appends elements at the end, so we can use sofar.remove(sofar.size()-1) as well
             sofar.remove(x);
         }
     }

@@ -6,7 +6,7 @@ class Solution {
         int k = nums.length-1;
         while(j <= k) {
             if(nums[j] == 1) j++;
-            else if(nums[j] < 1) swap(nums, j++, i++);
+            else if(nums[j] == 0) swap(nums, j++, i++);
             else swap(nums, j, k--);
         }
     }

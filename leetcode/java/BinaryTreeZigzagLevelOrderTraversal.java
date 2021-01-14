@@ -10,6 +10,8 @@
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if(root == null) return Collections.emptyList();
+
+        // switch between two stacks
         Deque<TreeNode> p = new ArrayDeque<>();
         p.push(root);
         
@@ -17,13 +19,14 @@ class Solution {
         boolean flag = true;
         List<Integer> list = new ArrayList<>();
         List<List<Integer>> result = new ArrayList<>();
+
         while(!p.isEmpty()) {
             TreeNode t = p.pop();
             list.add(t.val);
             pushToStack(t, q, flag);
             if(p.isEmpty()) {
-                result.add(list);
-                list = new ArrayList<>();
+                result.add(new ArrayList<>(list));
+                list.clear(); 
                 flag = !flag;
                 Deque<TreeNode> k = p;
                 p = q;
