@@ -41,6 +41,9 @@ class Solution {
     }
     
     private int kthHelper(int[] A, int s, int e, int k) {
+        // solution can always be found, so it will never hit here
+        // if(s > e) throw new IllegalArgumentException("xx");
+
         // base case
         if(s > e) return -1;
         
@@ -52,18 +55,18 @@ class Solution {
         else return kthHelper(A, p+1, e, k-r);
     } 
     
+    // |>=x       |<x|
+    //     i     j
     private int partition(int[] A, int s, int e) {
-        int t = s+1;
-        int x = A[s];
-        while(t <= e) {
-            if(A[t] >= x) t++;
-            else {
-                swap(A, t, e);
-                e--;
-            }
+        int i = s+1;
+        int j = e;
+        int p = A[s];
+        while(i <= j) {
+            if(A[i] >= p) i++;
+            else swap(A, i, j--);
         }
-        swap(A, s, e);
-        return e;
+        swap(A, s, j);
+        return j;
     }
     
     private void swap(int[] A, int x, int y) {

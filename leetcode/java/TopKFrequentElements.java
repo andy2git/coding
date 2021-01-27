@@ -20,3 +20,20 @@ class Solution {
         return result;
     }
 }
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        if (nums == null || nums.length == 0) throw new IllegalArgumentException("x");
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int x : nums) {
+            map.merge(x, 1, Integer::sum);
+        }
+
+        PriorityQueue<Integer> pq = new PriorityQueue(Comparator.comparingInt(map::get));
+        for (Integer x : map.keySet()) {
+            pq.add(x);
+            if (pq.size() > k) pq.remove();
+        }
+        return pq.stream().mapToInt(x -> x).toArray();
+    }
+}
