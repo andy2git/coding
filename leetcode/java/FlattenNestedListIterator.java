@@ -19,6 +19,7 @@ public class NestedIterator implements Iterator<Integer> {
     private Deque<NestedInteger> st = new ArrayDeque<>();
     
     // Ideally, if we can pass NestedInteger in, we can make it directly pre-order traversal
+    // basically put the root node in
     public NestedIterator(List<NestedInteger> nestedList) {
        revPush(st, nestedList);
     }
@@ -31,15 +32,14 @@ public class NestedIterator implements Iterator<Integer> {
     @Override
     public boolean hasNext() {
         while(!st.isEmpty()) {
-            NestedInteger ni = st.peek();
-            if (ni.isInteger()) return true;
+            if (st.peek().isInteger()) return true;
             List<NestedInteger> list = st.pop().getList();
             revPush(st, list);
         }
         return false;
     }
     
-    private void revPush(Deque<NestedInteger> st, List<NestedInteger> list) {
+    private static void revPush(Deque<NestedInteger> st, List<NestedInteger> list) {
         for(int i = list.size()-1; i >= 0; i--) {
             st.push(list.get(i));
         }

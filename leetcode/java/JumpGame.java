@@ -39,3 +39,19 @@ class Solution {
         return f[n-1];
     }
 }
+
+//Solution#3 
+// Greedy approach
+class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums == null || nums.length == 0) return true;
+        
+        int n = nums.length;
+        int lp = n-1;
+        for(int i = n-2; i >= 0; i--) {
+            if(i+nums[i] >=lp) lp = i;
+        }
+        
+        return lp == 0;
+    }
+}
