@@ -1,3 +1,21 @@
+// Recursive solution - should be the first solution coming up
+class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums == null || nums.length == 0) return true;
+        return cjh(nums, 0);
+    }
+    
+    private boolean cjh(int[] A, int pos) {
+        if(pos >= A.length) return true;
+        if(pos + A[pos] >= A.length-1) return true;
+        
+        for(int i = pos+1; i <= pos+A[pos]; i++) {
+            if(cjh(A, i)) return true;
+        }
+        return false;
+    }
+}
+
 class Solution {
     public boolean canJump(int[] nums) {
         if(nums == null) throw new IllegalArgumentException("x");
