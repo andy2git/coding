@@ -20,8 +20,9 @@ class Solution {
     }
 }
 
-/* Solution#2 will not work 
- * [3, 1] target = 1 => will not work for the following code
+/* Solution#2 will work as well
+ * [3, 1] target = 1 
+ * [1, 3] target = 1
  */
 class Solution {
     public int search(int[] nums, int target) {
@@ -32,7 +33,7 @@ class Solution {
             int m = s + (e-s)/2;
             if(target == nums[m]) return m;
             
-            if(nums[s] < nums[m]) {
+            if(nums[s] <= nums[m]) {
                 if(target < nums[m] && target >= nums[s]) e = m-1;
                 else s = m+1;
             } else {
