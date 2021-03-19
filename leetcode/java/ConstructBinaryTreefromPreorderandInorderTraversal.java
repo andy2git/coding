@@ -19,7 +19,9 @@ class Solution {
     }
     
     private TreeNode bth(int[] preorder, int s, int e, int[] inorder, int l, int h, Map<Integer, Integer> map) {
+        // this is needed as we do not perform index check when make recursive calls
         if(s > e || l > h) return null;
+        // (s == e) should be good enough as inoder will have same length anyway
         if(s == e || l == h) return new TreeNode(preorder[s]);
         
         TreeNode root = new TreeNode(preorder[s]);

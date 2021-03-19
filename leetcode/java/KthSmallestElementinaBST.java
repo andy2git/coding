@@ -50,26 +50,23 @@ class Solution {
     }
 }
 
-//Solution#3 Recursive version if Solution #2
+//Solution#3 Recursive version of Solution #2
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-        if(root == null) throw new IllegalArgumentException("x");
-        this.k = k;
-        inorder(root);
-        return val;
+        inorder(root, k);
+        return result;
     }
     
     private int cnt = 0;
-    private int k;
-    private int val;
-    private void inorder(TreeNode root){
+    private int result = 0;
+    private void inorder(TreeNode root, int k) {
         if(root == null) return;
-        inorder(root.left);
+        inorder(root.left, k);
         cnt++;
         if(cnt == k) {
-            val = root.val;
+            result = root.val;
             return;
         }
-        inorder(root.right);
+        inorder(root.right, k);
     }
 }

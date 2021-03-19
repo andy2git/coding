@@ -38,3 +38,36 @@ class Solution {
         return false;
     }
 }
+
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        if(board == null || board.length == 0) return false;
+        
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] v = new boolean[m][n];
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(explore (board, i, j, word, 0, v)) return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean explore(char[][] A, int i, int j, String s, int k, boolean[][] v) {
+        int m = A.length;
+        int n = A[0].length;
+        if(i < 0 || i >= m || j < 0 || j >= n) return false;
+        
+        if(A[i][j] != s.charAt(k) || v[i][j]) return false;
+        if(k == s.length()-1) return true;
+        v[i][j] = true;
+        boolean result = explore(A, i-1, j, s, k+1, v)
+            || explore(A, i+1, j, s, k+1, v)
+            || explore(A, i, j-1, s, k+1, v)
+            || explore(A, i, j+1, s, k+1, v);
+        if(!result) v[i][j] = false;
+        return result;
+    }
+}
+
