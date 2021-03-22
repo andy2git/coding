@@ -1,7 +1,11 @@
+// prefer this approach
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         if (nums == null) throw new IllegalArgumentException("x");
         if (nums.length == 0) return new int[] {-1, -1};
+
+        int lb = lowerBound(nums, target);
+        if(lb == -1) return new int[]{-1, -1};
         return new int[] {lowerBound(nums, target), upperBound(nums, target)};
     }
     
