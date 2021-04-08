@@ -3,7 +3,6 @@ public class Solution {
         if (nums == null || nums.length < 3) return Collections.emptyList();
 
         Arrays.sort(nums);
-
         List<List<Integer>> result = new ArrayList<>();
         int i = 0;
         int j = 0;
@@ -67,3 +66,5 @@ class Solution {
 // Solution#2: think it as a+b = -c. It will become 2sum problem
 // Since there are n possibilites for c, we will have n * time complexity of 2Sum
 // O(n^2) will be the complexity if we take this approach, which is the same as Solution#1
+
+
