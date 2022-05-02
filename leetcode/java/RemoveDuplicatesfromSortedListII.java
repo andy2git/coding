@@ -16,11 +16,11 @@ class Solution {
         ListNode pre = dummy;
         ListNode p = pre.next;
         while(p.next != null) {
-            if(p.next.val == pre.next.val) p = p.next;
+            if(p.next.val == p.val) p = p.next;
             else {
                 if(pre.next == p) {
                     pre = p;
-                    p = pre.next;
+                    p = p.next;
                 } else {
                     pre.next = p.next;
                     p = pre.next;

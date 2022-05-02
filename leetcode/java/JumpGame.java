@@ -60,6 +60,12 @@ class Solution {
 
 //Solution#3 
 // Greedy approach
+// ------------------------------------------------
+//                                               | 
+//                                               1. if this position can reach to lp
+//                                                      1. through this position
+//                                                      2. not through this position, if there is another position which can jump, it should be able to jump to this position
+//                                               2. if not, we should look for other position
 class Solution {
     public boolean canJump(int[] nums) {
         if(nums == null || nums.length == 0) return true;

@@ -28,3 +28,33 @@ class Solution {
         }
     }
 }
+
+
+/*
+ * Improved version to restore [sofar, left]
+ */
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        if(nums == null || nums.length == 0) return Collections.emptyList();
+        List<List<Integer>> result = new ArrayList<>();
+        ph(result, new ArrayList<>(), Arrays.stream(nums).boxed().collect(Collectors.toList()));
+        return result;
+    }
+    
+    private void ph(List<List<Integer>> result, List<Integer> sofar, List<Integer> remain) {
+        if(remain.isEmpty()) {
+            result.add(new ArrayList<>(sofar));
+            return;
+        }
+        
+        List<Integer> left = new ArrayList<>(remain); 
+        for(Integer x : remain) {
+            sofar.add(x);
+            left.remove(x);
+            ph(result, sofar, left);
+            // restore sofar and left
+            sofar.remove(sofar.size()-1);
+            left.add(x);
+        }
+    }
+}
