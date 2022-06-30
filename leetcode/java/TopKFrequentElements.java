@@ -29,6 +29,7 @@ class Solution {
             map.merge(x, 1, Integer::sum);
         }
 
+        // min heap: we need to remove the smallest one, as we are only interested in top K
         PriorityQueue<Integer> pq = new PriorityQueue(Comparator.comparingInt(map::get));
         for (Integer x : map.keySet()) {
             pq.add(x);

@@ -31,12 +31,10 @@ public class BSTIterator {
     /** @return the next smallest number */
     public int next() {
         TreeNode t = stack.pop();
-        if(t.right != null) {
-            p = t.right;
-            while(p != null){
-                stack.push(p);
-                p = p.left;
-            }
+        p = t.right;
+        while(p != null){
+             stack.push(p);
+             p = p.left;
         }
         return t.val;
     }

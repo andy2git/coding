@@ -17,3 +17,24 @@ class Solution {
         return -1;
     }
 }
+
+
+// much easier to write code
+class Solution {
+    public int pivotIndex(int[] nums) {
+        if(nums == null || nums.length == 0) throw new IllegalArgumentException("x");
+        
+        int sum = 0;
+        int n = nums.length;
+        for(int i = 0; i < n; i++) {
+            sum += nums[i];
+        }
+        
+        int ls = 0;
+        for(int i = 0; i<n; i++) {
+            if(sum-ls-nums[i] == ls) return i;
+            ls += nums[i];
+        }
+        return -1;
+    }
+}

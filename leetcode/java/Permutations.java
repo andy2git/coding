@@ -47,6 +47,7 @@ class Solution {
             return;
         }
         
+        // since the elements remained in left list does not matter, so we can simple put x -> left
         List<Integer> left = new ArrayList<>(remain); 
         for(Integer x : remain) {
             sofar.add(x);
